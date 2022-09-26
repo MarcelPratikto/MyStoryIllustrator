@@ -1,0 +1,15 @@
+#GOAL#
+A website where children can write a story. The website will draw illustrations of their story.
+
+#PROJECT REQUIREMENTS#
+Rough Project Description
+Input story as text
+We can generate a picture of the text
+Display the picture to whoever input-ed the text
+Store the picture and the story
+
+#LANGUAGES#
+Frontend - React
+Backend - Node.js
+Image Generation - Stable Diffusion 
+Database - (Database  TBD)

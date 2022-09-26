@@ -1,0 +1,6 @@
+Sprint 1
+* UI Mockups
+* Learn/Brush up on React
+* Choose a database
+
+Sprint 5 - Polish
