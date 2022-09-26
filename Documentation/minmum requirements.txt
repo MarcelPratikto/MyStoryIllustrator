@@ -17,3 +17,8 @@ Database - (Database  TBD)
 #FLOWCHART KEY#
 Orange is the bare mnimum
 Blue is Login/Username stuff
+
+Frontend Pages = Wavy boxes
+Backend = Trapezoid
+User Inputs = (Parenthesis)
+Variables = [Brackets]
