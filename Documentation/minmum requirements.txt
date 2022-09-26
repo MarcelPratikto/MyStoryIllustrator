@@ -13,3 +13,7 @@ Frontend - React
 Backend - Node.js
 Image Generation - Stable Diffusion 
 Database - (Database  TBD)
+
+#FLOWCHART KEY#
+Orange is the bare mnimum
+Blue is Login/Username stuff
