@@ -1,8 +1,13 @@
+import { ChakraProvider } from '@chakra-ui/react'
+import LoginForm from './components/loginForm';
 
 function App() {
   return (
-    <div className="App">
-    </div>
+    <ChakraProvider>
+      <div className="App">
+        <LoginForm />
+      </div>
+    </ChakraProvider>
   );
 }
 
