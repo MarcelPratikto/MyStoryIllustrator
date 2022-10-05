@@ -11,3 +11,8 @@ To run the app use the command:
 Look at the scripts section of package.json to see available scripts.
 The server runs on port 3000 locally. This is where you can access it.
 There are a few subfolders, routes, controllers, and models. Routes are used to decide which path was requested and direct to the appropriate controller. Controllers contain the logic. Models are templates of database tables
+
+
+# Client / frontend
+When you open the app, run`npm install`
+Start the app with npm start (make sure you are in the Client/my-story-illustrator-client directory)
