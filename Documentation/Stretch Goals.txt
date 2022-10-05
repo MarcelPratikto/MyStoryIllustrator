@@ -1,0 +1,5 @@
+USER SETTINGS PAGE
+*Option to change username and password
+    *Prompt user for current password and verify before allowing input
+*The ablity to leave comments on other's stories?
+    *User images
