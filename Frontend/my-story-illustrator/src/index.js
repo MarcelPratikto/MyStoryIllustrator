@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-function Car() {
-    return <h2>Hi, I am a Car!</h2>;
-  }
+const myFirstElement = <h1 className="myclass">Hello React!</h1>
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<Car />);
+root.render(myFirstElement);
+root.render(<p>Hello</p>)
