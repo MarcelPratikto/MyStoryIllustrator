@@ -4,8 +4,9 @@ function GoBackButton(){
     
     // TODO get our own commercially-usable arrow image
 
+
     return(
-        <button onclick="history.back()" style="background: images/Long-arrow-alt-left.jpg"></button>  
+        <button onclick="history.back()" style={{background: 'images/Long-arrow-alt-left.jpg'}}></button>  
     );
 }
 

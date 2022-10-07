@@ -3,7 +3,7 @@ function UserSettingsButton(){
     //TODO update where the link points to
     //TODO actually add the icon
     return(
-        <a href="UserSettings"><img src="images/gear_icon.jpg"></img></a>
+        <a id="userSettingsButton" href="UserSettings"><img src={require('./images/gear_icon.jpg')} alt="settings"></img></a>
     );
 }
 

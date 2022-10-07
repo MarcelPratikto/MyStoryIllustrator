@@ -14,7 +14,7 @@ function Header(props){
 
     return(
         <header id="header">
-            {(justSignedIn == false) &&
+            {(justSignedIn === false) &&
                 <GoBackButton />
             }
             {(editingStory) &&
@@ -22,7 +22,7 @@ function Header(props){
                     <input type="text">{props.pageTitle}</input>
                 </form>
             }
-            {(editingStory == false) &&
+            {(editingStory === false) &&
                 <h1>{props.pageTitle}</h1>
             }
             

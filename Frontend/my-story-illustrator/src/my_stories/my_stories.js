@@ -9,7 +9,7 @@ function MyStories(props){
     return(
         <div id="myStories">
             <NewStoryButton />
-            {stories.map((story) => <StoryCoverButton cover_image_uri={story.cover_image_uri} />)}
+            {stories.map((story) => <StoryCoverButton CoverImageUri={story.CoverImageUri} />)}
         </div>
     );
 }

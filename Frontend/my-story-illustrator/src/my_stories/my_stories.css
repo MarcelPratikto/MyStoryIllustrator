@@ -4,4 +4,5 @@
     row-gap: 10px;
     justify-content: space-evenly;
     grid-auto-flow: row;
+    border: 5px solid black;
 }
