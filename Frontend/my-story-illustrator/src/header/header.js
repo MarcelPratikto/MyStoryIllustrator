@@ -1,9 +1,34 @@
-function Headers(){
+import GoBackButton from "./go_back_button";
+import UserSettingsButton from "./user_settings_button";
+
+function Header(props){
+    // going back after loging in will take you back to the login. The button shouldn't do that. 
+    // an if/then statement to include it or not
+
+    // pageTitle should be "Title Here..." if this is called as an editor of a new book
+
+    //TODO I think read_book should handle these conditions by itself, but I wasn't sure I could include a header in it
+
+    const justSignedIn = props.justSignedIn;
+    const editingStory = props.editingStory;
+
     return(
-        <header>
-            {/*TODO the arrow link needs to go back to the previous page*/}
-            {/*TODO get our own commercially-usable arrow image*/}
-            <a onclick="history.back()"><img src="images/Long-arrow-alt-left.jpg" alt="go back" style="width:42px;height:42px;"></img></a>
+        <header id="header">
+            {(justSignedIn == false) &&
+                <GoBackButton />
+            }
+            {(editingStory) &&
+                <form>
+                    <input type="text">{props.pageTitle}</input>
+                </form>
+            }
+            {(editingStory == false) &&
+                <h1>{props.pageTitle}</h1>
+            }
+            
+            <UserSettingsButton />
         </header>
     );
 }
+
+export default Header;
