@@ -6,7 +6,7 @@ function GoBackButton(){
 
 
     return(
-        <button onclick="history.back()" style={{background: 'images/Long-arrow-alt-left.jpg'}}></button>  
+        <button id="goBackButton" onClick="history.back()" style={{background: require('./images/Long-arrow-alt-left.jpg')}}></button>  
     );
 }
 

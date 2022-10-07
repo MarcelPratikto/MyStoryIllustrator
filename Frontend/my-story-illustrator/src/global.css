@@ -5,6 +5,25 @@
 
 #header {
     border: 5px solid black;
+    display: grid;
+    height: 250px;
+    grid-auto-columns: 1fr;
+}
+
+#goBackButton{
+    grid-column: 1;
+    width: 100px;
+}
+
+#title{
+    grid-column: 2;
+    border: 2px solid black;
+    width: 100px;
+}
+
+#userSettingsButton{
+    grid-column: 3;
+    width: 100px;
 }
 
 #userSettingsButton img{

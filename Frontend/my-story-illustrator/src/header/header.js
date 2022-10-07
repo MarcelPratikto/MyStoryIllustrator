@@ -18,12 +18,12 @@ function Header(props){
                 <GoBackButton />
             }
             {(editingStory) &&
-                <form>
+                <form id="title">
                     <input type="text">{props.pageTitle}</input>
                 </form>
             }
             {(editingStory === false) &&
-                <h1>{props.pageTitle}</h1>
+                <h1 id="title">{props.pageTitle}</h1>
             }
             
             <UserSettingsButton />

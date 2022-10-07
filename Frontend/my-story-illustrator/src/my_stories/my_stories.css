@@ -3,6 +3,15 @@
     column-gap: 10px;
     row-gap: 10px;
     justify-content: space-evenly;
-    grid-auto-flow: row;
     border: 5px solid black;
+}
+
+.myStoryButton, .newStory {
+    border-radius: 10px;
+}
+
+.newStory {
+    background-color: grey;
+    grid-row-start: 1;
+    grid-column-start: 1;
 }

@@ -1,9 +1,0 @@
-.myStoryButton {
-    border-radius: 10px;
-}
-
-.myStoryButton .new_story {
-    background-color: grey;
-    grid-row-start: 0;
-    grid-column-start: 0;
-}

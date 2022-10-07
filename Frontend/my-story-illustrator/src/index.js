@@ -6,15 +6,10 @@ import Header from './header/header';
 
 import './global.css';
 import './my_stories/my_stories.css';
-import './my_stories/my_story_buttons.css';
-
-
 
 const stories = [{Title : "testing title", CoverImageUri : "header/images/Long-arrow-alt-left.jpg"}]
 const justSignedIn = false;
 const editingStory = false;
-    
-
 
 const element = (
     <body>
