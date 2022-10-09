@@ -15,7 +15,7 @@ const bookRoutes = require('./routes/bookRoutes')
 var app = express();
 
 //if the app is being hosted somewhere else, we might be using a different port. As a default we will use port 3000 when running the app locally
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 
 //enable CORS to allow anyone to access the app
 app.use(cors());
