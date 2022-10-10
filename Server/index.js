@@ -3,8 +3,6 @@ if (process.env.NODE_ENV !== 'production') {
 	require('dotenv').config();
 }
 
-console.log(process.env.HOST)
-
 // at the top of the file, import required modules and libraries
 const express = require('express');
 const cors = require('cors');
