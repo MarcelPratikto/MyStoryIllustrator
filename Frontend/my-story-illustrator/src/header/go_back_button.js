@@ -1,3 +1,6 @@
+import { IconButton } from '@chakra-ui/react'
+import { BsFillArrowLeftSquareFill } from "react-icons/bs";
+
 function GoBackButton(){
 
     // TODO test that history.back() works
@@ -6,7 +9,7 @@ function GoBackButton(){
 
 
     return(
-        <button id="goBackButton" onClick="history.back()" style={{background: require('./images/Long-arrow-alt-left.jpg')}}></button>  
+        <IconButton onClick="history.back()" aria-label='Go Back' icon={<BsFillArrowLeftSquareFill />}></IconButton>  
     );
 }
 

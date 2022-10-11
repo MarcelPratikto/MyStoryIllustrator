@@ -1,9 +1,13 @@
+import {Box, Text, VStack, Image} from '@chakra-ui/react'
+
 function StoryCoverButton(props){
     return(
-        <button className="myStoryButton">
-            {props.Title}
-            <img className="storyCoverImage" src={props.CoverImageUri} alt={props.Title}></img>
-        </button>
+        <Box as='button' border="none">
+            <VStack  border="none" background="none" >
+                <Text>{props.Title}</Text>
+                <Image src={props.CoverImageUri} alt={props.Title}></Image>
+            </VStack>
+        </Box>
     );
 }
 

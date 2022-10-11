@@ -14,6 +14,7 @@ function Header(props){
 
     return(
         <header id="header">
+            
             {(justSignedIn === false) &&
                 <GoBackButton />
             }

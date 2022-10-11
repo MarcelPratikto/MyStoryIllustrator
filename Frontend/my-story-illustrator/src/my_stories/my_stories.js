@@ -1,16 +1,21 @@
 import StoryCoverButton from "./story_cover_button";
-import NewStoryButton from "./new_story_button"
+import NewStoryButton from "./new_story_button";
+import StoryButtonWrapper from "./story_button_wrapper";
+
+import { Wrap } from '@chakra-ui/react';
 
 function MyStories(props){
 
     const stories = props.stories
 
+    /* TODO This being a div upens us up to Divitis*/
 
     return(
-        <div id="myStories">
-            <NewStoryButton />
-            {stories.map((story) => <StoryCoverButton CoverImageUri={story.CoverImageUri} />)}
-        </div>
+        <Wrap>
+            <StoryButtonWrapper element={<NewStoryButton/>}/>
+            
+            {stories.map((story) => <StoryButtonWrapper element={<StoryCoverButton Title = {story.Title} CoverImageUri={story.CoverImageUri} />}/>)}
+        </Wrap>
     );
 }
 

@@ -1,10 +1,14 @@
+import {Text, Image, VStack, Box} from '@chakra-ui/react'
+
 function NewStoryButton(){
-    //TODO make actuall plus button
+    //TODO have a images folder, get plus button there
     return(
-        <button className="newStory">
-            New Story
-            <img className="NewStoryImage" src="plus_button.jpg" alt="Write a new story."></img>
-        </button>
+        <Box as='button' border="none">
+            <VStack  border="none" background="none">
+                <Text >New Story</Text>
+                <Image src="https://cdn-icons-png.flaticon.com/512/3303/3303893.png" alt="Write a new story." width={100} height={100}></Image>
+            </VStack>
+        </Box>
     );
 }
 

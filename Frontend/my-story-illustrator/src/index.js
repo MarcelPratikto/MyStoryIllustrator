@@ -7,7 +7,8 @@ import Header from './header/header';
 import './global.css';
 import './my_stories/my_stories.css';
 
-const stories = [{Title : "testing title", CoverImageUri : "header/images/Long-arrow-alt-left.jpg"}]
+const stories = [{Title : "testing title", CoverImageUri : "https://picsum.photos/200/300"}]
+
 const justSignedIn = false;
 const editingStory = false;
 
