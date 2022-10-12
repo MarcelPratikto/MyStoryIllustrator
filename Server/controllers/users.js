@@ -1,7 +1,6 @@
 const { validationResult } = require("express-validator");
 const bcrypt = require("bcrypt");
 const User = require("../models/user");
-const sequelize = require("../util/database");
 
 //sign up a new user
 //request should include username and password
@@ -13,22 +12,18 @@ exports.postSignup = (req, res, next) => {
 
     //TODO: check if user already exists
 
+    if (!errors.isEmpty()) {
+        const error = new Error("Validation failed.");
+        error.data = errors.array();
+        return res.status(422).json({
+            message: "One or more errors occured.",
+            error: errors.errors
+        });
+    }
 
-    // if (!errors.isEmpty()) {
-    //     const error = new Error("Validation failed.");
-    //     // error.statusCode = 422;
-    //     error.data = errors.array();
-    //     return res.status(422).json({
-    //         message: "One or more errors occured.",
-    //         error: errors.errors
-    //     });
-    // }
-
-    try {
-        bcrypt
-            .hash(password, 7)
+        bcrypt.hash(password, 7)
             .then(pw => {
-                const user = User.build({
+                let user = User.build({
                     Username: username,
                     HashedPassword: pw
                 });
@@ -44,13 +39,7 @@ exports.postSignup = (req, res, next) => {
                     error: err
                 })
             })
-    }
-    catch (error) {
-        return res.status(422).json({
-            message: "One or more errors occured.",
-            error: error
-        })
-    }
+    
 
 
 }

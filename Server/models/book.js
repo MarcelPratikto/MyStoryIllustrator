@@ -16,10 +16,10 @@ const Book = sequelize.define('Book', {
         type: DataTypes.STRING
     },
     UserId: {
-        type: DataTypes.INTEGER
+        type: DataTypes.INTEGER,
+        allowNull: false
     }
 })
-
 
 
 module.exports = Book;
