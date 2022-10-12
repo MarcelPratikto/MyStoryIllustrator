@@ -14,9 +14,12 @@ const Book = sequelize.define('Book', {
     },
     Author: {
         type: DataTypes.STRING
+    },
+    UserId: {
+        type: DataTypes.INTEGER
     }
 })
 
-Book.belongsTo(User);
+
 
 module.exports = Book;
