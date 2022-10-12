@@ -1,6 +1,6 @@
 //set up env file
 if (process.env.NODE_ENV !== 'production') {
-	require('dotenv').config();
+    require('dotenv').config();
 }
 
 // at the top of the file, import required modules and libraries

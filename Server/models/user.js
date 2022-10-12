@@ -3,9 +3,24 @@ const Book = require('./book')
 const sequelize = require('../util/database');
 
 const User = sequelize.define('User', {
-    // TODO: put model definition here
+    Id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        allowNull: false,
+        primaryKey: true
+    },
+    Username: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true
+    },
+    HashedPassword: {
+        type: DataTypes.STRING
+    },
+
+
 })
 
-User.hasMany(User);
+// User.hasMany(Book);
 
 module.exports = User;
