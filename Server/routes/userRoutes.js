@@ -9,4 +9,6 @@ const controller = require('../controllers/users');
 //TODO: add validation middleware to make sure password is acceptable
 router.post('/signup', controller.postSignup);
 
+router.post('/login', controller.postLogin);
+
 module.exports = router;
