@@ -1,0 +1,10 @@
+How to run/install, parameters in a function
+Project architecture - Keys, etc.
+
+What it's being used for
+
+What needs to get done.
+
+PROJECT DOC
+What is, what development envirement
+How the team is run
