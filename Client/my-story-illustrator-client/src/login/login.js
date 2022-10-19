@@ -1,5 +1,7 @@
 import { Button, InputGroup, Stack } from "@chakra-ui/react";
 
+//This is made by Kyle just for funsies, mostly.
+
 function PasswordInput() {
     const [show, setShow] = React.useState(false)
     const handleClick = () => setShow(!show)
