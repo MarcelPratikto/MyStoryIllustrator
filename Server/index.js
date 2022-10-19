@@ -1,6 +1,6 @@
 //set up env file
 if (process.env.NODE_ENV !== 'production') {
-	require('dotenv').config();
+    require('dotenv').config();
 }
 
 // at the top of the file, import required modules and libraries
@@ -10,12 +10,19 @@ const sequelize = require('./util/database');
 
 const userRoutes = require('./routes/userRoutes');
 const bookRoutes = require('./routes/bookRoutes')
+const bodyParser = require('body-parser')
 
 //initialize express app
 var app = express();
 
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
+
 //if the app is being hosted somewhere else, we might be using a different port. As a default we will use port 3000 when running the app locally
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 
 //enable CORS to allow anyone to access the app
 app.use(cors());
@@ -43,6 +50,9 @@ async function testDB() {
     try {
         await sequelize.authenticate();
         console.log('Connection has been established successfully.');
+        sequelize.sync().then().catch(err => {
+            console.error();(err)
+        })
     } catch (error) {
         console.error('Unable to connect to the database:', error);
     }   

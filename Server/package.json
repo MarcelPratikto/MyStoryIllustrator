@@ -6,16 +6,22 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "start-dev": "nodemon index.js"
+    "start-dev": "nodemon index.js --trace-warnings"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.1.3",
+    "bcrypt": "^5.1.0",
+    "body-parser": "^1.20.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.1",
+    "express-validator": "^6.14.2",
+    "jsonwebtoken": "^8.5.1",
     "sequelize": "^6.23.2",
-    "tedious": "^15.1.0"
+    "tedious": "^14.6.0",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
