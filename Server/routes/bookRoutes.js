@@ -9,6 +9,7 @@ const controller = require('../controllers/books');
 //First paramater is the path. Next parameters are middleware - stuff that runs next
 router.post('/saveBook', controller.postSaveBook);
 
-// Put other story routes here.
+router.get('/generateImage', controller.generateImage)
+
 
 module.exports = router;
