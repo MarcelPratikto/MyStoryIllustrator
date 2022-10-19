@@ -11,7 +11,7 @@ function GoBackButton(){
 
 
     return(
-        <IconButton width={go_back_button_width} border='none' onClick="history.back()" aria-label='Go Back' icon={<BsFillArrowLeftSquareFill />}></IconButton>  
+        <IconButton width={go_back_button_width} border='none' bg="transparent" onClick="history.back()" aria-label='Go Back' icon={<BsFillArrowLeftSquareFill />}></IconButton>  
     );
 }
 

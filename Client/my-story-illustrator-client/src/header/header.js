@@ -1,4 +1,4 @@
-import { Input, Heading, Flex, Spacer, Box  } from "@chakra-ui/react";
+import { Input, Heading, Flex, Spacer, Box, Center  } from "@chakra-ui/react";
 import GoBackButton from "./go_back_button";
 import UserSettingsButton from "./user_settings_button";
 
@@ -27,12 +27,14 @@ function Header(props){
             }
             <Spacer/>
 
-            {(editingStory) &&
-                <Input placeholder={props.pageTitle} />
-            }
-            {(editingStory === false) &&
-                <Heading size='2xl' noOfLines={1}>{props.pageTitle}</Heading>
-            }
+            <Center>
+                {(editingStory) &&
+                    <Input placeholder={props.pageTitle} />
+                }
+                {(editingStory === false) &&
+                    <Heading size='2xl' noOfLines={1}>{props.pageTitle}</Heading>
+                }
+            </Center>
 
             <Spacer/>
             
