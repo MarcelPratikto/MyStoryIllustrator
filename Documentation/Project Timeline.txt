@@ -1,7 +1,0 @@
-Sprint 1
-* UI Mockups
-* Learn/Brush up on React
-* Choose a database
-* Learn how to generate propmpts for Stable Diffusion
-
-Sprint 5 - Polish

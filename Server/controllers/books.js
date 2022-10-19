@@ -1,25 +1,39 @@
 //controller for paths related to books
-const sequelize = require('../util/database');
-const book = require('../models/book');
+const { validationResult } = require("express-validator");
+const Book = require('../models/book');
 
 // save a new story to a user
-// request should include a userId and a story object
+// request should include a userId, title, author
 exports.postSaveBook = (req, res, next) => {
     const userId = req.body.userId;
-    const book = req.body.book;
-
-    (async () => {
-        await sequelize.sync();
+    const title = req.body.title;
+    const author = req.body.author;
+    const errors = validationResult(req);
         
-        const bookToSave = Book.build({
-            Id: book.id,
-            Title: book.title,
-            Author: book.Author
-
-        })
-
-        await bookToSave.save();
-      })();
+        if (!errors.isEmpty()) {
+            const error = new Error("Validation failed.");
+            error.data = errors.array();
+            return res.status(422).json({
+                message: "One or more errors occured.",
+                error: errors.errors
+            });
+        }
+    
+            Book.create({
+                Title: title,
+                Author: author,
+                UserId: userId
+            }).then(result => {
+                res.status(201).json({
+                    message: 'Book created',
+                    id: result.id
+                })
+            }).catch(err => {
+                res.status(422).json({
+                    message: "One or more errors occured.",
+                    error: err
+                })
+            });
 }
 
 exports.postGetBook = (req, res) => {
