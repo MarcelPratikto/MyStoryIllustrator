@@ -8,8 +8,6 @@ function MyStories(props){
 
     const stories = props.stories
 
-    /* TODO This being a div upens us up to Divitis*/
-
     return(
         <Wrap>
             <StoryButtonWrapper element={<NewStoryButton/>}/>
