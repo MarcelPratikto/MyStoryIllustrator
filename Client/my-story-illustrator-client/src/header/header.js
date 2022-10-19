@@ -1,3 +1,4 @@
+import { Input } from "@chakra-ui/react";
 import GoBackButton from "./go_back_button";
 import UserSettingsButton from "./user_settings_button";
 
@@ -13,22 +14,20 @@ function Header(props){
     const editingStory = props.editingStory;
 
     return(
-        <header id="header">
+        <>
             
             {(justSignedIn === false) &&
                 <GoBackButton />
             }
             {(editingStory) &&
-                <form id="title">
-                    <input type="text">{props.pageTitle}</input>
-                </form>
+                <Input placeholder={props.pageTitle} />
             }
             {(editingStory === false) &&
-                <h1 id="title">{props.pageTitle}</h1>
+                <Heading size='2xl' noOfLines={1}>{props.pageTitle}</Heading>
             }
             
             <UserSettingsButton />
-        </header>
+        </>
     );
 }
 
