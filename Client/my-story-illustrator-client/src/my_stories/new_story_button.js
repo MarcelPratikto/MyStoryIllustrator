@@ -1,4 +1,5 @@
 import {Text, VStack, Box, IconButton} from '@chakra-ui/react'
+import {BsFillPlusCircleFill} from 'react-icons/bs'
 
 function NewStoryButton(){
 

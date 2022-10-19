@@ -1,4 +1,4 @@
-import { Input } from "@chakra-ui/react";
+import { Input, Heading } from "@chakra-ui/react";
 import GoBackButton from "./go_back_button";
 import UserSettingsButton from "./user_settings_button";
 
