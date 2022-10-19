@@ -22,10 +22,12 @@ exports.postSaveBook = (req, res, next) => {
       })();
 }
 
-exports.postGetBook = (res, next) => {
+exports.postGetBook = (req, res) => {
+    const userId = req.body.userId;
+    book.findall({ where: {Id: userId}}).then(book)=> { 
+        res.send(book)}
 
-
-
-
+    
+    // id is the key value that you want to find, what should the input be? 
 }
 // add other books controllers here:
