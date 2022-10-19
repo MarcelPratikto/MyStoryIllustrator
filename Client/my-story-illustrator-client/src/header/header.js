@@ -1,23 +1,29 @@
-import { Input, Heading, Flex, Spacer  } from "@chakra-ui/react";
+import { Input, Heading, Flex, Spacer, Box  } from "@chakra-ui/react";
 import GoBackButton from "./go_back_button";
 import UserSettingsButton from "./user_settings_button";
 
+import {go_back_button_width} from '../constants';
+
 function Header(props){
-    // going back after loging in will take you back to the login. The button shouldn't do that. 
-    // an if/then statement to include it or not
-
-    // pageTitle should be "Title Here..." if this is called as an editor of a new book
-
-    //TODO I think read_book should handle these conditions by itself, but I wasn't sure I could include a header in it
+    //Header expects to be told:
+        //* Have we come from the login page?
+            //*It runs an if/then statement to include the goBack button or not. Don't need a button to go back to the login page.
+        //* The title of a page
+            //* If this is a new book, "Title Here..."
+            //* If this is an old book, the books title
+            //* If this is the "My Books" page, "My Books"
 
     const justSignedIn = props.justSignedIn;
     const editingStory = props.editingStory;
 
     return(
-        <Flex minWidth='max-content' alignItems='center' gap='1'>
+        <Flex minWidth='max-content' alignItems='center' justify='space-between'>
             
             {(justSignedIn === false) &&
                 <GoBackButton />
+            }
+            {(justSignedIn === true) &&
+                <Box width={go_back_button_width}></Box>
             }
             <Spacer/>
 

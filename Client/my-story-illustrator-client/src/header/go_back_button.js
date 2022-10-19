@@ -1,5 +1,7 @@
-import { IconButton } from '@chakra-ui/react'
+import { IconButton } from '@chakra-ui/react';
 import { BsFillArrowLeftSquareFill } from "react-icons/bs";
+
+import {go_back_button_width} from '../constants'
 
 function GoBackButton(){
 
@@ -9,7 +11,7 @@ function GoBackButton(){
 
 
     return(
-        <IconButton onClick="history.back()" aria-label='Go Back' icon={<BsFillArrowLeftSquareFill />}></IconButton>  
+        <IconButton width={go_back_button_width} border='none' onClick="history.back()" aria-label='Go Back' icon={<BsFillArrowLeftSquareFill />}></IconButton>  
     );
 }
 

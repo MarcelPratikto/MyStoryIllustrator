@@ -4,6 +4,9 @@ import StoryButtonWrapper from "./story_button_wrapper";
 
 import { Wrap } from '@chakra-ui/react';
 
+//MyStories needs:
+    //* A list of stories, which have titles, cover images
+
 function MyStories(props){
 
     const stories = props.stories
