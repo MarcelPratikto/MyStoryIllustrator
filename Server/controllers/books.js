@@ -22,4 +22,10 @@ exports.postSaveBook = (req, res, next) => {
       })();
 }
 
+exports.postGetBook = (res, next) => {
+
+
+
+
+}
 // add other books controllers here:
