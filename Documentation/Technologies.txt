@@ -1,0 +1,2 @@
+REACT
+* Use 'Chakra' for buttons, text fields
