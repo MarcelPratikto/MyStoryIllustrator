@@ -10,5 +10,6 @@ const controller = require('../controllers/books');
 router.post('/saveBook', controller.postSaveBook);
 
 // Put other story routes here.
+router.get('/getBook', controller.getBook);
 
 module.exports = router;
