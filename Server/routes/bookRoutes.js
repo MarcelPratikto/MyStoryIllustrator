@@ -9,6 +9,8 @@ const controller = require('../controllers/books');
 //First paramater is the path. Next parameters are middleware - stuff that runs next
 router.post('/saveBook', controller.postSaveBook);
 
+router.get('/getBook', controller.getBook);
+
 router.get('/generateImage', controller.generateImage)
 
 

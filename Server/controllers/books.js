@@ -38,6 +38,32 @@ exports.postSaveBook = (req, res, next) => {
     });
 }
 
+
+exports.getBook = (req, res) => {
+    const bookId = req.body.bookId;
+    Book.findOne({ 
+        where:{
+            Id: bookId
+        } 
+    }).then(book =>{
+
+    res.status(200).json({
+        Book: book
+        })
+       
+
+    }).catch(err => {
+        res.status(422).json({
+            message: "One or more errors occured.",
+            error: err
+        })
+    });
+
+    
+}
+     
+// add other books controllers here:
+
 //This endpoint should receive a username and a prompt, and the art style
 exports.generateImage = (req, res, next) => {
     const BASEURL = "http://weylin.ddns.net";
