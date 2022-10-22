@@ -64,6 +64,24 @@ exports.getBook = (req, res) => {
      
 // add other books controllers here:
 
+// Deletes a book
+exports.deleteBook = (req, res) => {
+    const bookId = req.body.bookId;
+    Book.findOne({
+        where:{Id: bookId}
+    }).destroy().then(result => {
+        res.status(200).json({
+            message: 'Book deleted',
+            id: result.id
+        })
+    }).catch(err => {
+        res.status(422).json({
+            message: "One or more errors occured.",
+            error: err
+        })
+    });
+}
+
 //This endpoint should receive a username and a prompt, and the art style
 exports.generateImage = (req, res, next) => {
     const BASEURL = "http://weylin.ddns.net";
