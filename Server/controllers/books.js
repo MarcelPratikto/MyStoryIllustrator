@@ -25,12 +25,14 @@ exports.postSaveBook = (req, res, next) => {
         Title: title,
         Author: author,
         UserId: userId
-    }).then(result => {
+    })
+    .then(result => {
         res.status(201).json({
-            message: 'Book created',
+            message: `Book created. BookId:${result.Id}`,
             id: result.id
         })
-    }).catch(err => {
+    })
+    .catch(err => {
         res.status(422).json({
             message: "One or more errors occured.",
             error: err
@@ -63,6 +65,30 @@ exports.getBook = (req, res) => {
 }
      
 // add other books controllers here:
+
+// Deletes a book
+// INPUT int bookId
+exports.deleteBook = (req, res) => {
+    //console.log(req.body)
+    const bookId = req.body.bookId;
+    Book.destroy({
+        where:{
+            Id: bookId
+        }
+    })
+    .then(result => {
+        res.status(200).json({
+            message: `Book deleted.`,
+            id: result.id
+        })
+    })
+    .catch(err => {
+        res.status(422).json({
+            message: "One or more errors occured.",
+            error: err
+        })
+    });
+}
 
 //This endpoint should receive a username and a prompt, and the art style
 exports.generateImage = (req, res, next) => {
