@@ -28,10 +28,11 @@ exports.postSignup = (req, res, next) => {
                     Username: username,
                     HashedPassword: pw
                 });
+                userObj = user
                 return user.save();
             }).then(result => {
                 res.status(201).json({
-                    message: 'User created',
+                    message: `User created. UserId:${result.Id}`,
                     id: result.id
                 })
             }).catch(err => {
