@@ -1,7 +1,7 @@
-import MyStories from './my_stories/my_stories';
-import Header from './header/header';
+import MyStories from '../../my_stories/my_stories';
+import Header from '../../header/header';
 
-import {stories, justSignedIn, editingStory, pageTitle} from './constants';
+import {stories, justSignedIn, editingStory, pageTitle} from '../../constants';
 //These were for testing.
 //TODO this won't work to show off until we get states working and send these props here
 
