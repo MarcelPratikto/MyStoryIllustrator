@@ -1,5 +1,5 @@
-import MyStories from './my_stories/my_stories';
-import Header from './header/header';
+import MyStories from '../components/my_stories/my_stories';
+import Header from '../components/header/header';
 
 import {stories, justSignedIn, editingStory, pageTitle} from './constants';
 //These were for testing.
