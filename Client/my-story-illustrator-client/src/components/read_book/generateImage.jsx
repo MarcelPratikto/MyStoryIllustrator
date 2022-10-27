@@ -41,7 +41,7 @@ function GenerateImage(props) {
     
     return(
         <Flex flexDirection="column" height="100%">
-            <Flex flexGrow={1} border={imageUrl == "" && "2px"} justify="center">
+            <Flex flexGrow={1} border={imageUrl == "" && "2px"} borderColor="lightGrey" justify="center">
                 <Image
                     src={imageUrl}
                     alt={prompt}
@@ -50,9 +50,12 @@ function GenerateImage(props) {
             <Box>
                 <Textarea
                     mt={3}
+                    px={3}
                     w="full"
                     ref={captionInputRef}
                     placeholder='Write a description of the picture you would like to create. Use nouns and adjectives as much as possible.'
+                    variant="unstyled"
+                    cursor="text"
                 ></Textarea>
                 <Flex alignItems="center">
                     <Button my={3} onClick={generateImage} disabled={isLoading}>Generate Image</Button>
