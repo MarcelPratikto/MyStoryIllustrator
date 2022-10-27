@@ -1,5 +1,5 @@
 // pageText will be blank if it's a new page
-import ImagePage from "./image_page";
+import ImagePage from "./generateImage";
 
 function ReadBook(props) {
     const mode = props.mode

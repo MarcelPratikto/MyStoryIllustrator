@@ -13,7 +13,7 @@ router.get('/getBook', controller.getBook);
 
 router.delete('/deleteBook', controller.deleteBook);
 
-router.get('/generateImage', controller.generateImage);
+router.post('/generateImage', controller.generateImage);
 
 
 module.exports = router;
