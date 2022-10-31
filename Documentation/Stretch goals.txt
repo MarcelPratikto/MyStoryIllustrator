@@ -1,0 +1,3 @@
+Get smaller bits from the Backend, instead of getting every book of the given user as a whole blob
+
+Some way to share books with others in a way they can't edit them

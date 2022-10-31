@@ -1,2 +1,9 @@
+#Backend
+Needs to have the pages set up in the endpoints
 
+#Frontend
+Get Jotai working
+> Jotai keeps track if someone logged in
+Get routing working
+>Team Huddle about putting the two together
 
