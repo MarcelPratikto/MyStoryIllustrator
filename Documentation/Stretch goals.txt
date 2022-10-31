@@ -1,0 +1,1 @@
+Get smaller bits from the Backend, instead of getting every book of the given user as a whole blob
