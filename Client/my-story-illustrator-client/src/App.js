@@ -21,6 +21,9 @@ function App() {
           <Route path="/">
             <Homepage />
           </Route>
+          <Route path="/book">
+            <readBook />
+          </Route>
         </Switch>
       </Router>
     </ChakraProvider>
