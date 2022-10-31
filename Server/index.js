@@ -15,8 +15,8 @@ const bodyParser = require('body-parser')
 //initialize express app
 var app = express();
 
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
+// // parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }))
 
 // parse application/json
 app.use(bodyParser.json())
@@ -24,8 +24,13 @@ app.use(bodyParser.json())
 //if the app is being hosted somewhere else, we might be using a different port. As a default we will use port 3000 when running the app locally
 const PORT = process.env.PORT || 8080;
 
-//enable CORS to allow anyone to access the app
-app.use(cors());
+
+// fixing potential CORS blocking
+var corsOptions = {
+    origin: '*',
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204 
+  }
+  app.use(cors(corsOptions));
 
 //This tells the app to check userRoutes and bookRoutes middlewares
 app.use(userRoutes);
