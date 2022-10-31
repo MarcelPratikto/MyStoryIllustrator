@@ -1,12 +1,11 @@
 import { ChakraProvider } from '@chakra-ui/react'
-import LoginForm from './components/login/loginForm';
-import CreateAccForm from './components/login/createAccForm';
-import BookPage from './pages/bookPage';
+
+import BookSetupModal from './components/read_book/bookSetupModal';
 
 function App() {
   return (
     <ChakraProvider>
-      <BookPage />
+      <BookSetupModal />
     </ChakraProvider>
   );
 }
