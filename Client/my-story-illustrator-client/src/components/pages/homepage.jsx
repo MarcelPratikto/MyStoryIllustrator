@@ -5,6 +5,8 @@ import {stories, justSignedIn, editingStory, pageTitle} from '../../constants';
 //These were for testing.
 //TODO this won't work to show off until we get states working and send these props here
 
+//TODO make this just editing, nothing else (don't forget to change the sub-elements)
+
 function HomePage(props) {
     return(
         <>

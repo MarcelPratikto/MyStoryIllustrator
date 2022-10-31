@@ -20,6 +20,9 @@ build/
 .env.test.local
 .env.production.local
 
+#documentation
+/Documentation/Flow_chart_AIO.drawio
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
