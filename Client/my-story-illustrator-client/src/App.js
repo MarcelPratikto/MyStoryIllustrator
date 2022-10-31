@@ -1,6 +1,6 @@
 import { ChakraProvider } from '@chakra-ui/react'
-import LoginForm from './components/loginForm';
-import CreateAccForm from './components/createAccForm';
+import LoginForm from './components/login/loginForm';
+import CreateAccForm from './components/login/createAccForm';
 
 function App() {
   return (

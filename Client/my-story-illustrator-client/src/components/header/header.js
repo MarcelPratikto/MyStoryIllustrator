@@ -2,7 +2,7 @@ import { Input, Heading, Flex, Spacer, Box, Center  } from "@chakra-ui/react";
 import GoBackButton from "./go_back_button";
 import UserSettingsButton from "./user_settings_button";
 
-import {go_back_button_width} from '../constants';
+import {go_back_button_width} from '../../util/constants'
 
 function Header(props){
     //Header expects to be told:

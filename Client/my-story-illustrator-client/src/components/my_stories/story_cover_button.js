@@ -1,6 +1,6 @@
 import {Text, VStack, Image} from '@chakra-ui/react';
 
-import {story_image_height, story_image_width} from '../constants';
+import { story_image_height, story_image_width } from '../../util/constants';
 
 function StoryCoverButton(props){
     return(
