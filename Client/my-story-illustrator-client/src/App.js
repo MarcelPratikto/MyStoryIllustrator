@@ -27,6 +27,9 @@ function App() {
   );
 }
 
+//we only need routes for HomePage ("My Stories"), a story, and the login
+//I think login is already handled?
+
 function getStories(userId){
   return(
     stories
