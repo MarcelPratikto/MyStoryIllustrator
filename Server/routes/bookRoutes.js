@@ -11,9 +11,11 @@ router.post('/saveBook', controller.postSaveBook);
 
 router.get('/getBook', controller.getBook);
 
+router.get('/getAllBooks', controller.getAllBooks);
+
 router.delete('/deleteBook', controller.deleteBook);
 
-router.get('/generateImage', controller.generateImage);
+router.post('/generateImage', controller.generateImage);
 
 
 module.exports = router;
