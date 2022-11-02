@@ -6,9 +6,6 @@ import {go_back_button_width} from '../../util/constants'
 function GoBackButton(){
 
     // TODO test that history.back() works
-    
-    // TODO get our own commercially-usable arrow image
-
 
     return(
         <IconButton width={go_back_button_width} border='none' bg="transparent" onClick="history.back()" aria-label='Go Back' icon={<BsFillArrowLeftSquareFill />}></IconButton>  
