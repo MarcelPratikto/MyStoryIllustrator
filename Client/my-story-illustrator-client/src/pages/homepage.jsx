@@ -1,7 +1,7 @@
 import MyStories from '../components/my_stories/my_stories';
 import Header from '../components/header/header';
 import {useAtom} from 'jotai';
-import { isLoggedInAtom } from '../../store/atoms';
+import { isLoggedInAtom } from '../store/atoms';
 
 
 import { stories, justSignedIn, editingStory, pageTitle } from '../util/constants';
