@@ -63,6 +63,32 @@ exports.getBook = (req, res) => {
 
     
 }
+
+exports.getAllBooks = (req, res) => {
+    const bookId = req.body.bookId;
+    const userId = req.body.userId;
+    Book.findAll({ 
+        where:{
+            UserId: userId
+        } 
+    }).then(book =>{
+
+    res.status(200).json({
+        Book: book
+        })
+       
+
+    }).catch(err => {
+        res.status(422).json({
+            message: "One or more errors occured.",
+            error: err
+        })
+    });
+
+    
+}
+
+
      
 // add other books controllers here:
 
