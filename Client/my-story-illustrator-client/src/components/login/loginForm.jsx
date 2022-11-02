@@ -11,8 +11,11 @@ import {
 import React, { useRef } from 'react';
 import useHttp from '../../util/use-http';
 import PasswordInput from './passwordInput';
+import {useAtom} from 'jotai';
+import { isLoggedInAtom } from '../../store/atoms';
 
 function LoginForm() {
+  const [isLoggedIn, updateIsLoggedIn] = useAtom(isLoggedInAtom);
   const { isLoading, error, sendRequest } = useHttp();
   const usernameInputRef = useRef();
   const passwordInputRef = useRef();
@@ -33,6 +36,7 @@ function LoginForm() {
     }, response => {
       if (!error) {
         localStorage.setItem('userToken', response.token);
+        //updateIsLoggedIn((value) => true);
       } else {
         console.error(error)
       }
