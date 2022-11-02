@@ -1,7 +1,7 @@
 import {Text, VStack, IconButton} from '@chakra-ui/react';
 import {BsFillPlusCircleFill} from 'react-icons/bs';
 
-import { story_image_width, story_image_height } from '../../util/constants';
+import {story_image_width, story_image_height} from '../../util/constants';
 
 function NewStoryButton(){
 

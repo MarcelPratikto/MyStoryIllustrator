@@ -1,6 +1,6 @@
 import { WrapItem, Center} from '@chakra-ui/react';
 
-import { story_image_width, story_image_height } from '../../util/constants';
+import {story_image_width, story_image_height} from '../../util/constants';
 
 function StoryButtonWrapper(props){
 
