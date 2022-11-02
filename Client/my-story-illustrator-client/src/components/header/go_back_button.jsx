@@ -8,7 +8,7 @@ function GoBackButton(){
     // TODO test that history.back() works
 
     return(
-        <IconButton width={go_back_button_width} border='none' bg="transparent" onClick="history.back()" aria-label='Go Back' icon={<BsFillArrowLeftSquareFill />}></IconButton>  
+        <IconButton width={go_back_button_width} border='none' bg="transparent" aria-label='Go Back' icon={<BsFillArrowLeftSquareFill />}></IconButton>  
     );
 }
 

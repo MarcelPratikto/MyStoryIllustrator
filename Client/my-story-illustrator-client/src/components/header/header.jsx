@@ -13,17 +13,14 @@ function Header(props){
             //* If this is an old book, the book's title
             //* If this is the "My Books" page, "My Books"
 
-    const justSignedIn = props.justSignedIn;
+
 
     return(
         <Flex minWidth='max-content' alignItems='center' justify='space-between'>
             
-            {(justSignedIn === false) &&
-                <GoBackButton />
-            }
-            {(justSignedIn === true) &&
-                <Box width={go_back_button_width}></Box>
-            }
+
+            <GoBackButton />
+
             <Spacer/>
 
             <Center>

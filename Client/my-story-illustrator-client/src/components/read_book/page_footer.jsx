@@ -14,14 +14,20 @@ function PageFooter(props) {
         const previousPage = props.pageNumber - 1
     }
     
+    // return(
+    //     <div>
+    //         {(previousPage != null) &&
+    //             <PreviousPageArrow /> 
+    //         }
+    //         {(nextPage != null) &&
+    //             <NextPageArrow /> 
+    //         }
+    //     </div>
+    // );
     return(
         <div>
-            {(previousPage != null) &&
-                <PreviousPageArrow /> 
-            }
-            {(nextPage != null) &&
-                <NextPageArrow /> 
-            }
         </div>
-    );
+    )
 }
+
+export default PageFooter

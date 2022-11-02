@@ -8,8 +8,10 @@ import BookPage from '../read_book/book_page';
 function ReadBook(props){
     return(
         <>
-        <Header justSignedIn={props.justSignedIn} pageTitle={props.pageTitle}></Header>
+        <Header pageTitle={props.pageTitle}></Header>
         <BookPage pageNumber={props.pageNumber} pageText={props.pageText} caption={props.caption} imageUrl={props.imageUrl}></BookPage>
         </>
     )
 }
+
+export default ReadBook
