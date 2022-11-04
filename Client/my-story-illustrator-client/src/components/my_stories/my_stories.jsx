@@ -6,9 +6,6 @@ import { Link as ReactRouterLink } from 'react-router-dom';
 
 import { Wrap } from '@chakra-ui/react';
 
-//TODO how does react/java do Dictionaries?
-//TODO keep track of book indices/ids in order to read them
-
 function MyStories(props) {
 
     const stories = props.stories

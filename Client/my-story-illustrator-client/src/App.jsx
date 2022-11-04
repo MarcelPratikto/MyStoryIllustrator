@@ -23,7 +23,6 @@ const dummy_books = [
                 pageNumber: 1,
                 text: "What kind of dumb engine can't get up a hill?",
                 caption: "Ha! Ha! Look at its stubby little wheels!",
-                imageUrl: 'https://picsum.photos/200/300'
             }
         ]
     }
@@ -36,7 +35,7 @@ function App() {
                 <Router>
                     <Routes>
                         <Route path="/" element={<HomePage stories={dummy_books} pageTitle={"My Stories"} />} />
-                        <Route path="/book/:id" element={<BookPage />} />
+                        <Route path="/book/:id" element={<BookPage books={ dummy_books } />} />
                         <Route path="/login" element={<Login />} />
                     </Routes>
                 </Router>
