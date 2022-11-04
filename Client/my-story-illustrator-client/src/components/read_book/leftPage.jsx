@@ -9,7 +9,6 @@ function LeftPage() {
             <Textarea
                 variant="unstyled"
                 cursor="text"
-                height="100%"
                 maxH="100%"
                 placeholder="Once upon a time..."
                 focusBorderColor="lightGrey"
