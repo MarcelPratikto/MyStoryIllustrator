@@ -1,4 +1,4 @@
-import { Box, Textarea } from "@chakra-ui/react"
+import { Textarea } from "@chakra-ui/react"
 import GenericPage from "./genericPage"
 
 function LeftPage() {

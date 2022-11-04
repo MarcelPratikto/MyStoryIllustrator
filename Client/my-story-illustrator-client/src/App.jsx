@@ -1,6 +1,5 @@
 import { ChakraProvider } from '@chakra-ui/react'
-import LoginForm from './components/login/loginForm';
-import CreateAccForm from './components/login/createAccForm';
+import Login from './pages/login';
 import { Provider } from "jotai";
 import {
     BrowserRouter as Router,
@@ -10,7 +9,6 @@ import {
 
 import HomePage from './pages/homepage';
 import BookPage from './pages/bookPage';
-import Login from './components/pages/login';
 
 const dummy_books = [
     {
@@ -30,8 +28,6 @@ const dummy_books = [
         ]
     }
 ]
-//TODO who knows what the actual data sturcture's gonna be?
-//java syntax for dicts is like objects
 
 function App() {
     return (
@@ -49,6 +45,5 @@ function App() {
     );
 }
 
-//we only need routes for HomePage ("My Stories"), a story, and the login
 
 export default App;

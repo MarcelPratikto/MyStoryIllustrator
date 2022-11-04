@@ -4,7 +4,7 @@ import { BsGearFill } from "react-icons/bs";
 function UserSettingsButton(){
 
     return(
-        <IconButton aria-label="settings" icon={<BsGearFill />} />
+        <IconButton aria-label="settings" variant="link" color="white" icon={<BsGearFill />} />
     );
 }
 

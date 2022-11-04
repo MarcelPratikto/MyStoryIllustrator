@@ -1,14 +1,21 @@
 import { IconButton } from '@chakra-ui/react';
-import { BsFillArrowLeftSquareFill } from "react-icons/bs";
+import { FaArrowLeft } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
 
 import {go_back_button_width} from '../../util/constants'
 
 function GoBackButton(){
-
-    // TODO test that history.back() works
+    const navigate = useNavigate()
 
     return(
-        <IconButton width={go_back_button_width} border='none' bg="transparent" aria-label='Go Back' icon={<BsFillArrowLeftSquareFill />}></IconButton>  
+        <IconButton
+            width={go_back_button_width}
+            variant="link"
+            color="white"
+            aria-label='Go Back'
+            icon={<FaArrowLeft />}
+            onClick={() => navigate(-1)}
+        />
     );
 }
 
