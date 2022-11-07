@@ -1,15 +1,15 @@
-import {Text, VStack, IconButton} from '@chakra-ui/react';
-import {BsFillPlusCircleFill} from 'react-icons/bs';
+import { Heading, VStack, Center, Icon } from '@chakra-ui/react';
+import { BsPlusCircle } from 'react-icons/bs';
 
-import {story_image_width, story_image_height} from '../../util/constants';
+function NewStoryButton() {
 
-function NewStoryButton(){
-
-    return(
+    return (
         <>
-            <VStack  border="none" background="none">
-                <Text >New Story</Text>
-                <IconButton border='none' bg="transparent" width={story_image_width - 16} height={story_image_height} aria-label='Write a new story.' icon={<BsFillPlusCircleFill />} size='lg' ></IconButton>
+            <VStack border="none" background="none">
+                <Heading size="lg">New Story</Heading>
+                <Center>
+                    <Icon as={BsPlusCircle} boxSize={24} />
+                </Center>
             </VStack>
         </>
     );
