@@ -2,13 +2,13 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../util/database');
 
 const Page = sequelize.define('Page', {
-    PageNumber: {
+    PageId: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         allowNull: false,
         primaryKey: true
     },
-    PageId: {
+    PageNumber: {
         type: DataTypes.INTEGER,
     },
     BookId: {
