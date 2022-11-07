@@ -3,7 +3,7 @@
 const express = require('express');
 const router = express.Router();
 
-const controller = require('../controllers/books');
+const controller = require('../controllers/bookController');
 
 //router.post means we are creating a resource
 //First paramater is the path. Next parameters are middleware - stuff that runs next

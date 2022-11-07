@@ -32,8 +32,8 @@ exports.postSignup = (req, res, next) => {
                 return user.save();
             }).then(result => {
                 res.status(201).json({
-                    message: `User created. UserId:${result.Id}`,
-                    id: result.id
+                    message: `User created.`,
+                    id: result.Id
                 })
             }).catch(err => {
                 res.status(422).json({

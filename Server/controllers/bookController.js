@@ -27,9 +27,14 @@ exports.postSaveBook = (req, res, next) => {
         UserId: userId
     })
     .then(result => {
-        res.status(201).json({
-            message: `Book created. BookId:${result.Id}`,
-            id: result.id
+        return res.status(201).json({
+            message: `Book created.`,
+            id: result.Id,
+            cat: "cat"
+            // message: {
+            //     "message": "Book created.",
+            //     "id": result.id
+            // }
         })
     })
     .catch(err => {

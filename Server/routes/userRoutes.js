@@ -3,7 +3,7 @@
 const express = require('express');
 const router = express.Router();
 
-const controller = require('../controllers/users');
+const controller = require('../controllers/userController');
 
 //sign up new user
 //TODO: add validation middleware to make sure password is acceptable

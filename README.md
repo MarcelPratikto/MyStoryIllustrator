@@ -25,3 +25,17 @@ There are a few subfolders, routes, controllers, and models. Routes are used to 
 
 When you open the app, run`npm install`
 Start the app with npm start (make sure you are in the Client/my-story-illustrator-client directory).
+
+## API Routes
+
+### http://localhost:8080/saveBook
+#### Input
+{
+    "userid": 11,
+    "title": "Book_Title",
+    "author": "Author_Name"
+}
+#### Output
+{
+    
+}
