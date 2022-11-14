@@ -6,7 +6,8 @@ const Page = sequelize.define('Page', {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         allowNull: false,
-        primaryKey: true
+        primaryKey: true,
+        unique: true
     },
     PageNumber: {
         type: DataTypes.INTEGER,
@@ -15,7 +16,7 @@ const Page = sequelize.define('Page', {
         type: DataTypes.INTEGER
     },
     ImageURL: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
     },
     Text: {
         type: DataTypes.STRING,

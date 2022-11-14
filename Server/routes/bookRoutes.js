@@ -17,5 +17,7 @@ router.delete('/deleteBook', controller.deleteBook);
 
 router.post('/generateImage', controller.generateImage);
 
+router.put('/updateBook', controller.putUpdateBook);
+
 
 module.exports = router;
