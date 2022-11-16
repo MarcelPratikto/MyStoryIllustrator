@@ -27,15 +27,162 @@ When you open the app, run`npm install`
 Start the app with npm start (make sure you are in the Client/my-story-illustrator-client directory).
 
 ## API Routes
-
-### http://localhost:8080/saveBook
-#### Input
+### User Routes
+|type|path|
+|-|-|
+|POST|/signup|
+|POST|/login|
+### Book Routes
+|type|path|
+|-|-|
+|POST|/saveBook|
+|GET|/getBook|
+|GET|/getAllBooks|
+|DELETE|/deleteBook|
+|POST|/generateImage|
+|PUT|/updateBook|
+#### http://localhost:8080/signup
+##### Input
 {
-    "userid": 11,
-    "title": "Book_Title",
-    "author": "Author_Name"
+    "username": "marcel1",
+    "password": "password",
+    "confirmPassword": "password"
 }
-#### Output
+##### Output
 {
-    
+    "message": "User Created.",
+    "id": 4
+}
+
+#### http://localhost:8080/login
+##### Input
+{
+    "username": "marcel1",
+    "password": "password"
+}
+##### Output
+{
+    "message": "Login successful. Token valid for the next 168 hours.",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImlhdCI6MTY2ODQ1NDAwOSwiZXhwIjoxNjY4NDU0MDA5fQ.c7jmmKMF9Uqfm3WD6VEXHTjr8LhJT8lMD1kpmLJMRs8"
+}
+
+#### http://localhost:8080/saveBook
+##### Input
+{
+    "userId": 4,
+    "title": "test",
+    "author": "Marcel"
+}
+##### Output
+{
+    "message": "Book created.",
+    "id": 28
+}
+
+#### http://localhost:8080/getBook
+##### Input
+{
+    "bookId": 28
+}
+##### Output
+{
+    "Book": {
+        "Id": 28,
+        "Title": "test",
+        "Author": "Marcel",
+        "UserId": 4,
+        "createdAt": "2022-11-14T19:38:12.225Z",
+        "updatedAt": "2022-11-14T19:38:12.225Z"
+    }
+}
+
+#### http://localhost:8080/getAllBooks
+##### Input
+{
+    "userId": 4
+}
+##### Output
+{
+    "Book": [
+        {
+            "Id": 29,
+            "Title": "Pineapple under the sea",
+            "Author": "Change author name",
+            "UserId": 4,
+            "createdAt": "2022-11-14T19:40:13.431Z",
+            "updatedAt": "2022-11-14T20:02:45.226Z",
+            "Pages": [
+                {
+                    "PageId": 20,
+                    "PageNumber": null,
+                    "BookId": 29,
+                    "ImageURL": "",
+                    "Text": "",
+                    "Caption": "",
+                    "createdAt": "2022-11-14T20:02:45.535Z",
+                    "updatedAt": "2022-11-14T20:02:45.535Z"
+                }
+            ]
+        }
+    ]
+}
+
+#### http://localhost:8080/deleteBook
+##### Input
+{
+    "bookId": 28
+}
+##### Output
+{
+    "message": "Book deleted."
+}
+
+#### http://localhost:8080/generateImage
+##### Input
+{
+    "username": "marcel1",
+    "prompt": "pinapple under the sea",
+    "style": "dr seuss"
+}
+##### Output
+{
+    "imageUrl": "http://weylin.ddns.net/marcel1/4c9b7e50645511ed88319f2af8e165c6.png"
+}
+
+#### http://localhost:8080/updateBook
+##### Input
+{
+    "bookId": 29,
+    "title": "Pineapple under the sea",
+    "author": "Change author name",
+    "pages": [
+        {
+            "PageNumber": 1,
+            "ImageURL": "http://weylin.ddns.net/marcel1/4c9b7e50645511ed88319f2af8e165c6.png",
+            "Text": "Text",
+            "Caption": "Caption"
+        }
+    ]
+}
+##### Output
+{
+    "message": "Book updated",
+    "book": {
+        "id": 29,
+        "title": "Pineapple under the sea",
+        "author": "Change author name",
+        "userId": 4,
+        "pages": [
+            {
+                "PageId": 20,
+                "PageNumber": null,
+                "ImageURL": "",
+                "Text": "",
+                "Caption": "",
+                "BookId": 29,
+                "updatedAt": "2022-11-14T20:02:45.535Z",
+                "createdAt": "2022-11-14T20:02:45.535Z"
+            }
+        ]
+    }
 }

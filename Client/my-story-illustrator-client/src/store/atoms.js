@@ -1,6 +1,5 @@
 import { atom } from 'jotai';
+import { atomWithStorage } from 'jotai/utils';
 
-
-export const isLoggedInAtom = atom(false);
-
-export const isModalOpenAtom = atom(false);
+export const userTokenAtom = atomWithStorage("userToken", null)
+export const userIdAtom = atomWithStorage("userId", null)

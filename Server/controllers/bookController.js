@@ -3,6 +3,7 @@ const axios = require('axios');
 const uuid = require('uuid');
 const { validationResult } = require("express-validator");
 const Book = require('../models/book');
+const Page = require('../models/page');
 
 // save a new story to a user
 // request should include a userId, title, author
@@ -10,6 +11,19 @@ exports.postSaveBook = (req, res, next) => {
     const userId = req.body.userId;
     const title = req.body.title;
     const author = req.body.author;
+
+    let pages
+    if (req.body.pages) {
+        pages = req.body.pages.map(page => {
+            return {
+                PageNumber: page.pageNumber,
+                ImageUrl: page.imageUrl,
+                Text: page.text,
+                Caption: page.caption
+            }
+        })
+
+    }
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
@@ -20,44 +34,159 @@ exports.postSaveBook = (req, res, next) => {
             error: errors.errors
         });
     }
-
     Book.create({
         Title: title,
         Author: author,
-        UserId: userId
+        UserId: userId,
+        Pages: pages || []
+    }, {
+        include: [Page],
+        as: 'Pages'
     })
-    .then(result => {
-        return res.status(201).json({
-            message: `Book created.`,
-            id: result.Id,
-            cat: "cat"
-            // message: {
-            //     "message": "Book created.",
-            //     "id": result.id
-            // }
+        .then(result => {
+            return res.status(201).json({
+                message: `Book created.`,
+                id: result.Id,
+            })
         })
+        .catch(err => {
+            console.log(err)
+            res.status(422).json({
+                message: "One or more errors occured.",
+                error: err
+            })
+        });
+}
+
+// to edit a story, should include:
+// bookId
+//title, author
+//pages:
+// page should have:
+// id, pageNumber, imageUrl, text, caption
+exports.putUpdateBook = (req, res) => {
+    const bookId = req.body.bookId;
+    const title = req.body.title;
+    const author = req.body.author;
+    const pages = req.body.pages.map(page => {
+        return {
+            PageNumber: page.pageNumber || null,
+            ImageURL: page.imageUrl || "",
+            Text: page.text || "",
+            Caption: page.caption || "",
+            BookId: bookId
+        }
     })
-    .catch(err => {
-        res.status(422).json({
-            message: "One or more errors occured.",
-            error: err
-        })
-    });
+    //save book
+    Book.findOne({
+        where: {
+            Id: bookId
+        },
+        include: {
+            model: Page,
+        }
+    }).then(oldBook => {
+
+        oldBook.Title = title;
+        oldBook.Author = author;
+        oldBook.save()
+            .then(book => {
+                //save pages
+                //lookup by book id and pagenumber, if it exists, update the page, else create it
+                let newPages = [];
+                let queries = [];
+                let updates = [];
+                pages.forEach(page => {
+                    let query = Page.findOne({
+                        where: {
+                            BookId: bookId,
+                            PageNumber: page.PageNumber
+                        }
+                    }).then(existingPage => {
+                        if (!existingPage) {
+                            let update = Page.create(page).then(newPage => {
+                                newPages.push(newPage)
+                            }).catch(err => {
+                                res.status(422).json({
+                                    message: "One or more errors occured.",
+                                    error: err
+                                })
+                            });
+                            updates.push(update)
+                        }
+                        else {
+                            let update = Page.update(page, {
+                                where: {
+                                    BookId: bookId,
+                                    PageNumber: page.PageNumber
+                                }
+                            }).then(newPage => {
+                                newPages.push(page)
+                            }).catch(err => {
+                                res.status(422).json({
+                                    message: "One or more errors occured.",
+                                    error: err
+                                })
+                            });
+                            updates.push(update)
+                        }
+                    })
+                        .catch(err => {
+                            res.status(422).json({
+                                message: "One or more errors occured.",
+                                error: err
+                            })
+                        });
+                    queries.push(query)
+                })
+                //run this code after all updates have been made
+                Promise.all(queries).then(results => {
+                    Promise.all(updates).then(results => {
+                        return res.status(201).json({
+                            message: `Book updated`,
+                            book: {
+                                id: bookId,
+                                title: book.Title,
+                                author: book.Author,
+                                userId: book.UserId,
+                                pages: newPages
+                            }
+                        })
+
+                    })
+                })
+
+            })
+            .catch(err => {
+                console.log(err)
+                res.status(422).json({
+                    message: "One or more errors occured.",
+                    error: err
+                })
+            });
+    })
+        .catch(err => {
+            res.status(422).json({
+                message: "One or more errors occured.",
+                error: err
+            })
+        });
+
 }
 
 
 exports.getBook = (req, res) => {
     const bookId = req.body.bookId;
-    Book.findOne({ 
-        where:{
+    Book.findOne({
+        where: {
             Id: bookId
-        } 
-    }).then(book =>{
+        }
+    }).then(book => {
 
-    res.status(200).json({
-        Book: book
+        res.status(200).json({
+            Book: book
         })
-       
+
 
     }).catch(err => {
         res.status(422).json({
@@ -66,35 +195,46 @@ exports.getBook = (req, res) => {
         })
     });
 
-    
+
 }
 
 exports.getAllBooks = (req, res) => {
-    const bookId = req.body.bookId;
     const userId = req.body.userId;
-    Book.findAll({ 
-        where:{
+    Book.findAll({
+        where: {
             UserId: userId
-        } 
-    }).then(book =>{
-
-    res.status(200).json({
-        Book: book
+        },
+        include: [
+            {model: Page }  
+        ]
+    }).then(books => {
+        res.status(200).json({
+            books: books.map(book => {
+                return {
+                    id: book.Id,
+                    title: book.Title,
+                    author: book.Author,
+                    userId: book.userId,
+                    createdAt: book.createdAt,
+                    updatedAt: book.updatedAt
+                }
+            })
         })
-       
 
-    }).catch(err => {
+
+    })
+        .catch(err => {
         res.status(422).json({
             message: "One or more errors occured.",
             error: err
         })
     });
 
-    
+
 }
 
 
-     
+
 // add other books controllers here:
 
 // Deletes a book
@@ -103,22 +243,22 @@ exports.deleteBook = (req, res) => {
     //console.log(req.body)
     const bookId = req.body.bookId;
     Book.destroy({
-        where:{
+        where: {
             Id: bookId
         }
     })
-    .then(result => {
-        res.status(200).json({
-            message: `Book deleted.`,
-            id: result.id
+        .then(result => {
+            res.status(200).json({
+                message: `Book deleted.`,
+                id: result.id
+            })
         })
-    })
-    .catch(err => {
-        res.status(422).json({
-            message: "One or more errors occured.",
-            error: err
-        })
-    });
+        .catch(err => {
+            res.status(422).json({
+                message: "One or more errors occured.",
+                error: err
+            })
+        });
 }
 
 //This endpoint should receive a username and a prompt, and the art style
