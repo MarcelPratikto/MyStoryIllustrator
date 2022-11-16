@@ -208,9 +208,17 @@ exports.getAllBooks = (req, res) => {
             {model: Page }  
         ]
     }).then(book => {
-        
         res.status(200).json({
-            Book: book
+            books: books.map(book => {
+                return {
+                    id: book.Id,
+                    title: book.Title,
+                    author: book.Author,
+                    userId: book.userId,
+                    createdAt: book.createdAt,
+                    updatedAt: book.updatedAt
+                }
+            })
         })
 
 

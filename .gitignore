@@ -30,3 +30,5 @@ yarn-error.log*
 .idea/
 .env
 .vscode
+.sqlite
+Server/db/myStoryIllustrator.sqlite

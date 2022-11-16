@@ -8,20 +8,22 @@ import {
   Spinner,
   Text,
 } from '@chakra-ui/react'
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import useHttp from '../../util/use-http';
 import PasswordInput from './passwordInput';
 import {useAtom} from 'jotai';
-import { isLoggedInAtom } from '../../store/atoms';
+import { userTokenAtom, userIdAtom } from '../../store/atoms';
+import { Link as ReactRouterLink, useNavigate } from 'react-router-dom';
 
 function LoginForm() {
-  const [isLoggedIn, updateIsLoggedIn] = useAtom(isLoggedInAtom);
+  const [userToken, setUserToken] = useAtom(userTokenAtom);
+  const [userId, setUserId] = useAtom(userIdAtom)
+  const navigate = useNavigate();
   const { isLoading, error, sendRequest } = useHttp();
   const usernameInputRef = useRef();
   const passwordInputRef = useRef();
 
   const tryLogin = () => {
-
     const request = {
       username: usernameInputRef.current.value,
       password: passwordInputRef.current.value
@@ -35,18 +37,27 @@ function LoginForm() {
       }
     }, response => {
       if (!error) {
-        localStorage.setItem('userToken', response.token);
-        //updateIsLoggedIn((value) => true);
+        setUserToken(response.token);
+        setUserId(response.userId);
+        navigate("/");
       } else {
         console.error(error)
       }
-      // TODO: redirect to home page
     })
   }
 
+  useEffect(() => {
+    if (userToken) {
+      navigate('/')
+    }
+
+  }, []);
+
   return (
-    <div className="App">
-      <Box m={20}
+    <Box >
+      <Box 
+        m="auto"
+        mt={20}
         boxSize="sm"
         border='2px'
         borderColor='gray.200'
@@ -82,10 +93,10 @@ function LoginForm() {
           
         </Box>
         <Box m={7}>
-          <Link>Don't have an account? Click Here.</Link>
+          <Link as={ReactRouterLink} to={'/signup'}>Don't have an account? Click Here.</Link>
         </Box>
       </Box>
-    </div>
+    </Box>
   );
 }
 
