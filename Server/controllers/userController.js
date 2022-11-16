@@ -55,7 +55,7 @@ exports.postLogin = (req, res, next) => {
     const password = req.body.password
 
     //allow user to stay logged in for one week (168 hours)
-    const tokenExpiryTime = 168;
+    const tokenExpiryTime = 168 * 60 * 60;
     let loadedUser;
     User.findOne({
         where: {
