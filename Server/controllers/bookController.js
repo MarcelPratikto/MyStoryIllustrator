@@ -203,9 +203,11 @@ exports.getAllBooks = (req, res) => {
     Book.findAll({
         where: {
             UserId: userId
-        }
-    }).then(books => {
-
+        },
+        include: [
+            {model: Page }  
+        ]
+    }).then(book => {
         res.status(200).json({
             books: books.map(book => {
                 return {
@@ -220,7 +222,8 @@ exports.getAllBooks = (req, res) => {
         })
 
 
-    }).catch(err => {
+    })
+        .catch(err => {
         res.status(422).json({
             message: "One or more errors occured.",
             error: err
