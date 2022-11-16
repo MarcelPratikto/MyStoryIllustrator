@@ -17,8 +17,8 @@ function MyStories(props) {
             <StoryButtonWrapper bg="#e1e1ea">
                 <NewStoryButton/>
             </StoryButtonWrapper>
-
-            {stories.map((story) => {
+            
+            { stories && stories.map((story) => {
                 return (
                     <StoryButtonWrapper>
                         <Link as={ReactRouterLink} to={'/book/' + story.id} key={story.id} display="block" h="100%" _hover={{textDecoration: "none"}} >

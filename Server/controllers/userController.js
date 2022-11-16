@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 //sign up a new user
 //request should include username and password, and a confirm password field
 exports.postSignup = (req, res, next) => {
+    console.log('creating new user user')
     //get data out of request
     const username = req.body.username;
     const password = req.body.password;
@@ -48,6 +49,7 @@ exports.postSignup = (req, res, next) => {
 // takes a username and a password
 // returns success or error message
 exports.postLogin = (req, res, next) => {
+    console.log('logging in user')
     const error = [];
     const username = req.body.username;
     const password = req.body.password
@@ -88,7 +90,7 @@ exports.postLogin = (req, res, next) => {
         res.status(200).json({
             message: `Login successful. Token valid for the next ${tokenExpiryTime} hours.`,
             token: token,
-            userId: loadedUser.id
+            userId: loadedUser.Id
         })
     })
         .catch(err => {

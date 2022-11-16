@@ -11,7 +11,7 @@ router.post('/saveBook', controller.postSaveBook);
 
 router.get('/getBook', controller.getBook);
 
-router.get('/getAllBooks', controller.getAllBooks);
+router.post('/getAllBooks', controller.getAllBooks);
 
 router.delete('/deleteBook', controller.deleteBook);
 

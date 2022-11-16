@@ -1,46 +1,72 @@
 import { ChakraProvider } from '@chakra-ui/react'
 import Login from './pages/login';
-import { Provider } from "jotai";
+import { userTokenAtom, userIdAtom } from './store/atoms';
+import { useAtom, Provider } from "jotai";
+import { useEffect, useState } from 'react';
 import {
     BrowserRouter as Router,
     Routes,
-    Route
+    Route,
+    Navigate
 } from "react-router-dom";
+import useHttp from './util/use-http';
 
 import HomePage from './pages/homepage';
 import BookPage from './pages/bookPage';
 
-const dummy_books = [
-    {
-        id: 1,
-        title: "The little engine that could not",
-        author: "",
-        userId: "",
-        pages: [
-            {
-                bookID: "",
-                id: "",
-                pageNumber: 1,
-                text: "What kind of dumb engine can't get up a hill?",
-                caption: "Ha! Ha! Look at its stubby little wheels!",
-            }
-        ]
-    }
-]
-
 function App() {
+    const [userToken, setUserToken] = useAtom(userTokenAtom);
+    const [userId, setUserId] = useAtom(userIdAtom);
+    const { isLoading, error, sendRequest } = useHttp();
+    const [books, setBooks] = useState([]);
+
+    useEffect(() => {
+        if (userToken) {
+            const request = {
+                userId: userId
+            }
+
+            sendRequest({
+                url: 'http://localhost:8080/getAllBooks',
+                method: 'POST',
+                body: request,
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }, response => {
+                if (!error) {
+
+                    setBooks(() => response.books)
+                } else {
+                    console.log(error)
+                }
+            })
+        }
+
+    }, []);
+
     return (
-        <Provider>
-            <ChakraProvider>
-                <Router>
+        <ChakraProvider>
+            <Router>
+                {userToken ? (
                     <Routes>
-                        <Route path="/" element={<HomePage stories={dummy_books} pageTitle={"My Stories"} />} />
-                        <Route path="/book/:id" element={<BookPage books={ dummy_books } />} />
-                        <Route path="/login" element={<Login />} />
+                        <Route path="/" element={<HomePage stories={books} pageTitle={"My Stories"} />} />
+                        <Route path="/book/:id" element={<BookPage books={books} />} />
+                        <Route path="*" element={<Navigate replace to="/" />} />
+
                     </Routes>
-                </Router>
-            </ChakraProvider>
-        </Provider>
+                ) : (
+
+                    <Routes>
+                        <Route path="/" element={<Navigate replace to="/login" />} />
+                        <Route path="/login" element={<Login isSignUp={false} />} />
+                        <Route path="/signup" element={<Login isSignUp={true} />} />
+                        <Route path="*" element={<Navigate replace to="/login" />} />
+                    </Routes>
+                )
+                }
+            </Router>
+        </ChakraProvider>
     );
 }
 
