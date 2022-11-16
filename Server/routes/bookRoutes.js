@@ -2,22 +2,23 @@
 
 const express = require('express');
 const router = express.Router();
+const isAuth = require('../util/is-auth');
 
 const controller = require('../controllers/bookController');
 
 //router.post means we are creating a resource
 //First paramater is the path. Next parameters are middleware - stuff that runs next
-router.post('/saveBook', controller.postSaveBook);
+router.post('/saveBook', isAuth, controller.postSaveBook);
 
-router.get('/getBook', controller.getBook);
+router.get('/getBook', isAuth, controller.getBook);
 
-router.post('/getAllBooks', controller.getAllBooks);
+router.post('/getAllBooks', isAuth, controller.getAllBooks);
 
-router.delete('/deleteBook', controller.deleteBook);
+router.delete('/deleteBook', isAuth, controller.deleteBook);
 
-router.post('/generateImage', controller.generateImage);
+router.post('/generateImage', isAuth, controller.generateImage);
 
-router.put('/updateBook', controller.putUpdateBook);
+router.put('/updateBook', isAuth, controller.putUpdateBook);
 
 
 module.exports = router;

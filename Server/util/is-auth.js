@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const errormsg = require('../error');
+const errormsg = require('./errors');
 
 module.exports = (req, res, next) => {
     const errors = [];
