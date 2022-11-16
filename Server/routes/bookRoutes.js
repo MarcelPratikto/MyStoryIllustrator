@@ -12,7 +12,7 @@ router.post('/saveBook', isAuth, controller.postSaveBook);
 
 router.get('/getBook', isAuth, controller.getBook);
 
-router.post('/getAllBooks', isAuth, controller.getAllBooks);
+router.get('/getAllBooks', isAuth, controller.getAllBooks);
 
 router.delete('/deleteBook', isAuth, controller.deleteBook);
 
