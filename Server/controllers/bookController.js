@@ -207,7 +207,7 @@ exports.getAllBooks = (req, res) => {
         include: [
             {model: Page }  
         ]
-    }).then(book => {
+    }).then(books => {
         res.status(200).json({
             books: books.map(book => {
                 return {
