@@ -49,6 +49,7 @@ function BookSetupModal() {
                     <ModalFooter>
                         <Button colorScheme='blue' mr={3} onClick={onClose}>
                             Go
+                            
                         </Button>
                     </ModalFooter>
                 </ModalContent>
