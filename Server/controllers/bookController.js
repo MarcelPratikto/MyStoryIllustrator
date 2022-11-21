@@ -3,7 +3,7 @@ const axios = require('axios');
 const uuid = require('uuid');
 const { validationResult } = require("express-validator");
 const Book = require('../models/book');
-const Page = require('../models/page');
+const Spread = require('../models/spread');
 
 // save a new story to a user
 // request should include a userId, title, author
@@ -12,14 +12,14 @@ exports.postSaveBook = (req, res, next) => {
     const title = req.body.title;
     const author = req.body.author;
 
-    let pages
-    if (req.body.pages) {
-        pages = req.body.pages.map(page => {
+    let spreads
+    if (req.body.spreads) {
+        spreads = req.body.spreads.map(spread => {
             return {
-                PageNumber: page.pageNumber,
-                ImageUrl: page.imageUrl,
-                Text: page.text,
-                Caption: page.caption
+                SpreadNumber: spread.spread,
+                ImageUrl: spread.imageUrl,
+                Text: spread.text,
+                Caption: spread.caption
             }
         })
 
@@ -38,10 +38,10 @@ exports.postSaveBook = (req, res, next) => {
         Title: title,
         Author: author,
         UserId: userId,
-        Pages: pages || []
+        Spreads: spreads || []
     }, {
-        include: [Page],
-        as: 'Pages'
+        include: [Spread],
+        as: 'Spreads'
     })
         .then(result => {
             return res.status(201).json({
@@ -61,19 +61,19 @@ exports.postSaveBook = (req, res, next) => {
 // to edit a story, should include:
 // bookId
 //title, author
-//pages:
-// page should have:
-// id, pageNumber, imageUrl, text, caption
+//spreads:
+// spread should have:
+// id, spreadNumber, imageUrl, text, caption
 exports.putUpdateBook = (req, res) => {
     const bookId = req.body.bookId;
     const title = req.body.title;
     const author = req.body.author;
-    const pages = req.body.pages.map(page => {
+    const spreads = req.body.spreads.map(spread => {
         return {
-            PageNumber: page.pageNumber || null,
-            ImageURL: page.imageUrl || "",
-            Text: page.text || "",
-            Caption: page.caption || "",
+            SpreadNumber: spread.spreadNumber || null,
+            ImageURL: spread.imageUrl || "",
+            Text: spread.text || "",
+            Caption: spread.caption || "",
             BookId: bookId
         }
     })
@@ -83,7 +83,7 @@ exports.putUpdateBook = (req, res) => {
             Id: bookId
         },
         include: {
-            model: Page,
+            model: Spread,
         }
     }).then(oldBook => {
 
@@ -91,21 +91,21 @@ exports.putUpdateBook = (req, res) => {
         oldBook.Author = author;
         oldBook.save()
             .then(book => {
-                //save pages
-                //lookup by book id and pagenumber, if it exists, update the page, else create it
-                let newPages = [];
+                //save spreads
+                //lookup by book id and spread number, if it exists, update the spread, else create it
+                let newSpreads = [];
                 let queries = [];
                 let updates = [];
-                pages.forEach(page => {
-                    let query = Page.findOne({
+                spreads.forEach(spread => {
+                    let query = Spread.findOne({
                         where: {
                             BookId: bookId,
-                            PageNumber: page.PageNumber
+                            SpreadNumber: spread.SpreadNumber
                         }
-                    }).then(existingPage => {
-                        if (!existingPage) {
-                            let update = Page.create(page).then(newPage => {
-                                newPages.push(newPage)
+                    }).then(existingSpread => {
+                        if (!existingSpread) {
+                            let update = Spread.create(spread).then(newSpread => {
+                                newSpreads.push(newSpread)
                             }).catch(err => {
                                 res.status(422).json({
                                     message: "One or more errors occured.",
@@ -115,13 +115,13 @@ exports.putUpdateBook = (req, res) => {
                             updates.push(update)
                         }
                         else {
-                            let update = Page.update(page, {
+                            let update = Spread.update(spread, {
                                 where: {
                                     BookId: bookId,
-                                    PageNumber: page.PageNumber
+                                    SpreadNumber: spread.SpreadNumber
                                 }
-                            }).then(newPage => {
-                                newPages.push(page)
+                            }).then(newSpread => {
+                                newSpreads.push(spread)
                             }).catch(err => {
                                 res.status(422).json({
                                     message: "One or more errors occured.",
@@ -149,7 +149,7 @@ exports.putUpdateBook = (req, res) => {
                                 title: book.Title,
                                 author: book.Author,
                                 userId: book.UserId,
-                                pages: newPages
+                                spreads: newSpreads
                             }
                         })
 
@@ -205,7 +205,7 @@ exports.getAllBooks = (req, res) => {
             UserId: userId
         },
         include: [
-            {model: Page }  
+            {model: Spread }  
         ]
     }).then(books => {
         res.status(200).json({
@@ -214,9 +214,20 @@ exports.getAllBooks = (req, res) => {
                     id: book.Id,
                     title: book.Title,
                     author: book.Author,
-                    userId: book.userId,
+                    userId: book.UserId,
                     createdAt: book.createdAt,
-                    updatedAt: book.updatedAt
+                    updatedAt: book.updatedAt,
+                    spreads: book.Spreads.map(spread => {
+                        return {
+                            spreadNumber: spread.SpreadNumber,
+                            bookId: spread.BookId,
+                            imageUrl: spread.ImageURL,
+                            text: spread.Text,
+                            caption: spread.Caption,
+                            createdAt: spread.createdAt,
+                            updatedAt: spread.updatedAt
+                        }
+                    })
                 }
             })
         })

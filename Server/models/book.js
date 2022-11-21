@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const User = require('./user')
 const sequelize = require('../util/database');
-const Page = require('./page');
+const Spread = require('./spread');
 
 const Book = sequelize.define('Book', {
     Id: {
@@ -22,8 +22,8 @@ const Book = sequelize.define('Book', {
     }
 })
 
-Book.hasMany(Page);
-Page.belongsTo(Book, {
+Book.hasMany(Spread);
+Spread.belongsTo(Book, {
     foreignKey: 'BookId'
 });
 
