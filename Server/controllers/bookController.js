@@ -65,7 +65,7 @@ exports.postSaveBook = (req, res, next) => {
 // spread should have:
 // id, spreadNumber, imageUrl, text, caption
 exports.putUpdateBook = (req, res) => {
-    const bookId = req.body.bookId;
+    const bookId = req.body.id;
     const title = req.body.title;
     const author = req.body.author;
     const spreads = req.body.spreads.map(spread => {
@@ -106,12 +106,13 @@ exports.putUpdateBook = (req, res) => {
                         if (!existingSpread) {
                             let update = Spread.create(spread).then(newSpread => {
                                 newSpreads.push(newSpread)
-                            }).catch(err => {
-                                res.status(422).json({
-                                    message: "One or more errors occured.",
-                                    error: err
-                                })
-                            });
+                            })
+                            //     .catch(err => {
+                            //     res.status(422).json({
+                            //         message: "One or more errors occured.",
+                            //         error: err
+                            //     })
+                            // });
                             updates.push(update)
                         }
                         else {
@@ -122,21 +123,22 @@ exports.putUpdateBook = (req, res) => {
                                 }
                             }).then(newSpread => {
                                 newSpreads.push(spread)
-                            }).catch(err => {
-                                res.status(422).json({
-                                    message: "One or more errors occured.",
-                                    error: err
-                                })
-                            });
+                            })
+                            //     .catch(err => {
+                            //     res.status(422).json({
+                            //         message: "One or more errors occured.",
+                            //         error: err
+                            //     })
+                            // });
                             updates.push(update)
                         }
                     })
-                        .catch(err => {
-                            res.status(422).json({
-                                message: "One or more errors occured.",
-                                error: err
-                            })
-                        });
+                        // .catch(err => {
+                        //     res.status(422).json({
+                        //         message: "One or more errors occured.",
+                        //         error: err
+                        //     })
+                        // });
                     queries.push(query)
                 })
                 //run this code after all updates have been made
@@ -157,20 +159,20 @@ exports.putUpdateBook = (req, res) => {
                 })
 
             })
-            .catch(err => {
-                console.log(err)
-                res.status(422).json({
-                    message: "One or more errors occured.",
-                    error: err
-                })
-            });
+            // .catch(err => {
+            //     console.log(err)
+            //     res.status(422).json({
+            //         message: "One or more errors occured.",
+            //         error: err
+            //     })
+            // });
     })
-        .catch(err => {
-            res.status(422).json({
-                message: "One or more errors occured.",
-                error: err
-            })
-        });
+        // .catch(err => {
+        //     res.status(422).json({
+        //         message: "One or more errors occured.",
+        //         error: err
+        //     })
+        // });
 
 }
 
