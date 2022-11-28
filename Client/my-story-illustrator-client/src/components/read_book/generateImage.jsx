@@ -6,11 +6,14 @@ function GenerateImage(props) {
     const [prompt] = useState('');
     const [imageUrl, setImageUrl] = useState('')
     const { isLoading, error, sendRequest } = useHttp();
+    useEffect(() => {
+        setImageUrl(props.image)
+    }, [props.image]);
+    
 
     const captionInputRef = useRef();
 
     const generateImage = () => {
-
         const request = {
             prompt: captionInputRef.current.value,
             username: 'testUser', //change this later to use real username
@@ -56,6 +59,7 @@ function GenerateImage(props) {
                     placeholder='Write a description of the picture you would like to create. Use nouns and adjectives as much as possible.'
                     variant="unstyled"
                     cursor="text"
+                    value={props.caption}
                 ></Textarea>
                 <Flex alignItems="center">
                     <Button my={3} onClick={generateImage} disabled={isLoading}>Generate Image</Button>
