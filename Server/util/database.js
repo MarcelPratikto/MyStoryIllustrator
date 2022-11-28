@@ -1,8 +1,6 @@
 const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize(process.env.DB,
-    process.env.DB_USER,
-    process.env.PASSWORD,
+const sequelize = new Sequelize(
     {
         dialect: 'sqlite',
         storage: 'db/myStoryIllustrator.sqlite',
