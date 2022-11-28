@@ -18,7 +18,7 @@ exports.postSignup = (req, res, next) => {
         const error = new Error("Validation failed.");
         error.data = errors.array();
         return res.status(422).json({
-            message: "One or more errors occured.",
+            message: "Could not sign up.",
             error: errors.errors
         });
     }
