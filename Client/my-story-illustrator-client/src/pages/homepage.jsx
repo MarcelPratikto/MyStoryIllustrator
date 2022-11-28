@@ -6,7 +6,7 @@ function HomePage(props) {
     return (
         <Flex h="100%" flexDir="column">
             <Header heading="My Stories" showSettings={false} showBackArrow={false} />
-            <MyStories stories={props.stories} flexGrow="1"/>
+            <MyStories stories={props.stories} flexGrow="1" loading={props.loading} />
         </Flex>
     )
 

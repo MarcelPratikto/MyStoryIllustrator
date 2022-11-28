@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const errormsg = require('../error');
+const errormsg = require('./errors');
 
 module.exports = (req, res, next) => {
     const errors = [];
@@ -34,7 +34,7 @@ module.exports = (req, res, next) => {
             error: err
         });
     }
-    req.userId = decodedToken.userId;
+    req.body.userId = decodedToken.userId;
     
     next();
 }

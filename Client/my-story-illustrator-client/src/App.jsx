@@ -15,28 +15,20 @@ import BookPage from './pages/bookPage';
 
 function App() {
     const [userToken, setUserToken] = useAtom(userTokenAtom);
-    const [userId, setUserId] = useAtom(userIdAtom);
     const { isLoading, error, sendRequest } = useHttp();
     const [books, setBooks] = useState([]);
     
     useEffect(() => {
         if (userToken) {
-            const request = {
-                userId: userId
-            }
-
             sendRequest({
                 url: 'http://localhost:8080/getAllBooks',
-                method: 'POST',
-                body: request,
+                method: 'GET',
                 headers: {
                     "Content-Type": "application/json",
                 }
             }, response => {
                 if (!error) {
                     setBooks(() => response.books)
-                } else {
-                    console.log(error)
                 }
             })
         }
@@ -48,7 +40,7 @@ function App() {
             <Router>
                 {userToken ? (
                     <Routes>
-                        <Route path="/" element={<HomePage stories={books} pageTitle={"My Stories"} />} />
+                        <Route path="/" element={<HomePage stories={books} pageTitle={"My Stories"} loading={isLoading} />} />
                         <Route path="/book/:id" element={<BookPage books={books} />} />
                         <Route path="*" element={<Navigate replace to="/" />} />
 
