@@ -1,6 +1,6 @@
 import { Heading, VStack, Center, Icon } from '@chakra-ui/react';
 import { BsPlusCircle } from 'react-icons/bs';
-import BookSetupModal from './bookSetupModal';
+//import BookSetupModal from './bookSetupModal';
 
 function NewStoryButton() {
 
