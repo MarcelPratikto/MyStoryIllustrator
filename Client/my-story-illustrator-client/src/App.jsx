@@ -1,6 +1,6 @@
 import { ChakraProvider } from '@chakra-ui/react'
 import Login from './pages/login';
-import { userTokenAtom } from './store/atoms';
+import { userTokenAtom, userIdAtom } from './store/atoms';
 import { useAtom } from "jotai";
 import { useEffect, useState } from 'react';
 import {
@@ -10,7 +10,6 @@ import {
     Navigate
 } from "react-router-dom";
 import useHttp from './util/use-http';
-
 import HomePage from './pages/homepage';
 import BookPage from './pages/bookPage';
 
@@ -18,7 +17,7 @@ function App() {
     const [userToken, setUserToken] = useAtom(userTokenAtom);
     const { isLoading, error, sendRequest } = useHttp();
     const [books, setBooks] = useState([]);
-
+    
     useEffect(() => {
         if (userToken) {
             sendRequest({
@@ -26,7 +25,6 @@ function App() {
                 method: 'GET',
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": userToken
                 }
             }, response => {
                 if (!error) {
@@ -35,13 +33,7 @@ function App() {
             })
         }
 
-    }, [error, sendRequest, userToken]);
-
-    if (error) {
-        // for now just assume it is an expired jwt or something. Refine once we have more specific error messages in place
-        console.log('could not get books')
-        setUserToken(null)
-    }
+    },[userToken, sendRequest, error]);
 
     return (
         <ChakraProvider>

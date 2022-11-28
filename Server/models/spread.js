@@ -1,15 +1,15 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../util/database');
 
-const Page = sequelize.define('Page', {
-    PageId: {
+const Spread = sequelize.define('Spread', {
+    SpreadId: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         allowNull: false,
         primaryKey: true,
         unique: true
     },
-    PageNumber: {
+    SpreadNumber: {
         type: DataTypes.INTEGER,
     },
     BookId: {
@@ -27,4 +27,4 @@ const Page = sequelize.define('Page', {
 })
 
 
-module.exports = Page
+module.exports = Spread
