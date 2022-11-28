@@ -1,11 +1,16 @@
 import GenerateImage from "./generateImage"
 import GenericPage from "./genericPage"
 
-function RightPage(props) {
+function RightPage({ caption, image, updateCaption, updateImage }) {
 
     return (
         <GenericPage>
-            <GenerateImage mode="edit" caption={props.caption} image={props.image} />
+            <GenerateImage
+                caption={caption}
+                image={image}
+                updateCaption={updateCaption}
+                updateImage={updateImage}
+            />
         </GenericPage>
     )
 }

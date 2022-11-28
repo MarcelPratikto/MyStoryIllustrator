@@ -1,9 +1,11 @@
 import { Textarea } from "@chakra-ui/react"
 import GenericPage from "./genericPage"
 
-function LeftPage(props) {
+function LeftPage({text, updateText}) {
+    const handleChange = (newText) => {
+        updateText(newText.target.value)
+    }
 
-    console.log(props.text)
     return (
         <GenericPage>
             <Textarea
@@ -14,7 +16,8 @@ function LeftPage(props) {
                 focusBorderColor="lightGrey"
                 fontSize="2xl"
                 resize="none"
-                value={props.text}
+                value={text}
+                onChange={handleChange}
             />
         </GenericPage>
     )
