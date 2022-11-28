@@ -37,7 +37,7 @@ Start the app with npm start (make sure you are in the Client/my-story-illustrat
 |-|-|
 |POST|/saveBook|
 |GET|/getBook|
-|GET|/getAllBooks|
+|POST|/getAllBooks|
 |DELETE|/deleteBook|
 |POST|/generateImage|
 |PUT|/updateBook|
@@ -99,30 +99,24 @@ Start the app with npm start (make sure you are in the Client/my-story-illustrat
 #### http://localhost:8080/getAllBooks
 ##### Input
 {
-    "userId": 4
+    "userId": 1
 }
 ##### Output
 {
-    "Book": [
+    "books": [
         {
-            "Id": 29,
-            "Title": "Pineapple under the sea",
-            "Author": "Change author name",
-            "UserId": 4,
-            "createdAt": "2022-11-14T19:40:13.431Z",
-            "updatedAt": "2022-11-14T20:02:45.226Z",
-            "Pages": [
-                {
-                    "PageId": 20,
-                    "PageNumber": null,
-                    "BookId": 29,
-                    "ImageURL": "",
-                    "Text": "",
-                    "Caption": "",
-                    "createdAt": "2022-11-14T20:02:45.535Z",
-                    "updatedAt": "2022-11-14T20:02:45.535Z"
-                }
-            ]
+            "id": 1,
+            "title": "test1",
+            "author": "Marcel",
+            "createdAt": "2022-11-16T19:29:59.697Z",
+            "updatedAt": "2022-11-16T19:29:59.697Z"
+        },
+        {
+            "id": 2,
+            "title": "test2",
+            "author": "Marcel",
+            "createdAt": "2022-11-16T19:30:32.316Z",
+            "updatedAt": "2022-11-16T19:30:32.316Z"
         }
     ]
 }
