@@ -16,43 +16,48 @@ import {
 import { Heading, VStack, Center, Icon } from '@chakra-ui/react';
 import { BsPlusCircle } from 'react-icons/bs';
 
-import React, { useRef, useEffect } from 'react';
+import React, { useRef} from 'react';
 import useHttp from '../../util/use-http';
 import {useAtom} from 'jotai';
-import { userTokenAtom, userIdAtom } from '../../store/atoms';
+import { userTokenAtom, currentBookAtom } from '../../store/atoms';
 import { Link as ReactRouterLink, useNavigate } from 'react-router-dom';
 
 import StyleChoices from "../read_book/styleChoices";
 
 function NewStoryButton() {
-    const [userToken, setUserToken] = useAtom(userTokenAtom);
+    const [userToken] = useAtom(userTokenAtom);
     const navigate = useNavigate();
     const { isOpen, onOpen, onClose } = useDisclosure()
     const {error, sendRequest } = useHttp();
     const titleInputRef = useRef();
     const authorInputRef = useRef();
     const styleInputRef = useRef();
+    //TODO use ref or use the atom?
+
+    //any time you set the book atom, it overwrites the whole thing
+    //onChangeHandler to update each proprty
 
     const saveBook = () => {
+        console.log('saving book...')
         const request = {
           title: titleInputRef.current.value,
           author: authorInputRef.current.value,
           style: styleInputRef.current.value
-        } 
+        }
+        //TODO figgure out how to get something out of StyleChoices
+        console.log(request) 
         sendRequest({
-          url: 'http://localhost:8080/my_stories',
-          //TODO is this right? /\
+          url: 'http://localhost:8080/saveBook',
           method: 'POST',
           body: request,
           headers: {
             "Content-Type": "application/json",
             "Authorization": userToken
           }
-          //TODO if the userToken's deleted/ the person's logged out, does the book take them back to login?
         }, response => {
+            console.log(response)
           if (!error) {
-            navigate("/read_book/{response.book_id}");
-            //TODO navigate where? /\
+            navigate(`/read_book/${response.id}`);
           } else {
             console.error(error)
           }
@@ -77,15 +82,16 @@ function NewStoryButton() {
                     <ModalBody>
                         <FormControl>
                             <FormLabel>Title</FormLabel>
-                            <Input type='text' />
+                            <Input type='text' ref={titleInputRef}/>
                         </FormControl>
                         <FormControl>
                             <FormLabel>Author</FormLabel>
-                            <Input type='text' />
+                            <Input type='text' ref={authorInputRef}/>
                         </FormControl>
                         <FormControl>
                             <FormLabel>Art Style</FormLabel>
-                            <StyleChoices />
+                            <StyleChoices ref={styleInputRef}/>
+                            
                         </FormControl>
                     </ModalBody>
 
