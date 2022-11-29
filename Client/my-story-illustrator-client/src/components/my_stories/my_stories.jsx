@@ -1,7 +1,7 @@
 import StoryCoverButton from "./story_cover_button";
 import NewStoryButton from "./bookSetupModal";
 import StoryButtonWrapper from "./story_button_wrapper";
-import { Link } from '@chakra-ui/react'
+import { Link, Spinner } from '@chakra-ui/react'
 import { Link as ReactRouterLink } from 'react-router-dom';
 
 import { Wrap } from '@chakra-ui/react';
@@ -14,7 +14,7 @@ function MyStories(props) {
 
     return (
         <Wrap padding="20px" bg="#c6caef" flexGrow="1">
-            <StoryButtonWrapper bg="#e1e1ea">
+            <StoryButtonWrapper bg="#e1e1ea" >
                 <NewStoryButton/>
             </StoryButtonWrapper>
             
@@ -29,6 +29,9 @@ function MyStories(props) {
                 )
             }
             )}
+            {props.loading && <Spinner />
+                
+            }
         </Wrap>
     );
 }

@@ -7,13 +7,13 @@ import {
 
 
 function StyleChoiceInput(props) {
-    const { image, inputRef, ...radioProps } = props
+    const { image, ...radioProps } = props
     const { state, getInputProps, getCheckboxProps, htmlProps, getLabelProps } =
         useRadio(radioProps)
 
     return (
         <chakra.label {...htmlProps} cursor='pointer'>
-            <input ref={inputRef} {...getInputProps({})} hidden />
+            <input {...getInputProps({})} hidden />
             <Box
                 {...getCheckboxProps()}
                 bg={state.isChecked ? 'green.200' : 'transparent'}
