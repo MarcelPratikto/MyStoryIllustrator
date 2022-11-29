@@ -20,7 +20,7 @@ module.exports = (req, res, next) => {
         errors.push(err);
         console.log(errors);
         err = errormsg(errors);
-        return res.status(500).json({
+        return res.status(401).json({
             message: "One or more errors occured.",
             error: err
         });

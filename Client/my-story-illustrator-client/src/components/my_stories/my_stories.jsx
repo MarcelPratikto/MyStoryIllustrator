@@ -16,7 +16,6 @@ function MyStories(props) {
             <StoryButtonWrapper bg="#e1e1ea" >
                 <NewStoryButton/>
             </StoryButtonWrapper>
-            
             { stories && stories.map((story) => {
                 return (
                     <StoryButtonWrapper key={story.id}>

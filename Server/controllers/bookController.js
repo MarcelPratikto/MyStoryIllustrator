@@ -178,24 +178,28 @@ exports.putUpdateBook = (req, res) => {
 
 
 exports.getBook = (req, res) => {
-    const bookId = req.body.bookId;
+    const bookId = req.params.id;
     Book.findOne({
         where: {
             Id: bookId
-        }
+        },
+        include: [
+            {model: Spread}
+        ]
     }).then(book => {
 
         res.status(200).json({
-            Book: book
+            book: book
         })
 
 
-    }).catch(err => {
-        res.status(422).json({
-            message: "getBooks controller error.",
-            error: err
-        })
-    });
+    })
+    //     .catch(err => {
+    //     res.status(422).json({
+    //         message: "getBooks controller error.",
+    //         error: err
+    //     })
+    // });
 
 
 }

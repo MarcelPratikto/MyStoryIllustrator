@@ -10,6 +10,7 @@ function StyleChoiceInput(props) {
     const { image, ...radioProps } = props
     const { state, getInputProps, getCheckboxProps, htmlProps, getLabelProps } =
         useRadio(radioProps)
+    console.log(state)
 
     return (
         <chakra.label {...htmlProps} cursor='pointer'>
