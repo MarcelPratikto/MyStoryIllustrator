@@ -23,7 +23,6 @@ function Header(props) {
 
     const saveStory = () => {
         // TODO: update the book when this button is clicked
-        console.log(currentBook)
         const request = currentBook
         sendRequest({
             url: 'http://localhost:8080/updateBook',
@@ -36,9 +35,7 @@ function Header(props) {
         }, response => {
             if (!error) {
                 console.log('book saved successfully')
-                console.log(response)
             } else {
-                console.log('error')
                 console.log(error)
             }
         })

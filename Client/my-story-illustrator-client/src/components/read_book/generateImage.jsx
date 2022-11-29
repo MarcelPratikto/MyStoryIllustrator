@@ -1,17 +1,16 @@
 import { Image, Box, Flex, Button, Textarea, Spinner, Text } from '@chakra-ui/react';
 import { useState, useRef, useEffect } from 'react';
 import useHttp from '../../util/use-http';
+import { userTokenAtom } from '../../store/atoms';
+import { useAtom } from 'jotai';
 
 function GenerateImage({caption, image, updateCaption, updateImage}) {
     const [prompt] = useState('');
     const { isLoading, error, sendRequest } = useHttp();
-
+    const [userToken] = useAtom(userTokenAtom);
     const captionChangeHandler = (newCaption) => {
         updateCaption(newCaption.target.value);
     }
-
-    
-
     const captionInputRef = useRef();
 
     const generateImage = () => {
@@ -25,12 +24,12 @@ function GenerateImage({caption, image, updateCaption, updateImage}) {
           method: 'POST',
           body: request,
           headers: {
-            "Content-Type": "application/json"
+              "Content-Type": "application/json",
+              "Authorization": userToken
           }
         }, response => {
                 //handle success
-                updateImage(response.imageUrl);
-                 
+                updateImage(response.imageUrl);                 
         })
  
     }
@@ -42,7 +41,6 @@ function GenerateImage({caption, image, updateCaption, updateImage}) {
         }
 
     }, [error, updateImage]);
-    
     return(
         <Flex flexDirection="column" height="100%">
             <Flex flexGrow={1} border={image === "" && "2px"} borderColor="lightGrey" justify="center">

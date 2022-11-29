@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const errormsg = require('../error');
+const errormsg = require('./errors');
 
 module.exports = (req, res, next) => {
     const errors = [];
@@ -20,7 +20,7 @@ module.exports = (req, res, next) => {
         errors.push(err);
         console.log(errors);
         err = errormsg(errors);
-        return res.status(500).json({
+        return res.status(401).json({
             message: "One or more errors occured.",
             error: err
         });
@@ -34,7 +34,7 @@ module.exports = (req, res, next) => {
             error: err
         });
     }
-    req.userId = decodedToken.userId;
+    req.body.userId = decodedToken.userId;
     
     next();
 }

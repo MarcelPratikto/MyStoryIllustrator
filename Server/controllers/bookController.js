@@ -30,7 +30,7 @@ exports.postSaveBook = (req, res, next) => {
         const error = new Error("Validation failed.");
         error.data = errors.array();
         return res.status(422).json({
-            message: "One or more errors occured.",
+            message: "Could not save book.",
             error: errors.errors
         });
     }
@@ -52,7 +52,7 @@ exports.postSaveBook = (req, res, next) => {
         .catch(err => {
             console.log(err)
             res.status(422).json({
-                message: "One or more errors occured.",
+                message: "Could not create book.",
                 error: err
             })
         });
@@ -178,24 +178,28 @@ exports.putUpdateBook = (req, res) => {
 
 
 exports.getBook = (req, res) => {
-    const bookId = req.body.bookId;
+    const bookId = req.params.id;
     Book.findOne({
         where: {
             Id: bookId
-        }
+        },
+        include: [
+            {model: Spread}
+        ]
     }).then(book => {
 
         res.status(200).json({
-            Book: book
+            book: book
         })
 
 
-    }).catch(err => {
-        res.status(422).json({
-            message: "One or more errors occured.",
-            error: err
-        })
-    });
+    })
+    //     .catch(err => {
+    //     res.status(422).json({
+    //         message: "getBooks controller error.",
+    //         error: err
+    //     })
+    // });
 
 
 }
@@ -238,7 +242,7 @@ exports.getAllBooks = (req, res) => {
     })
         .catch(err => {
         res.status(422).json({
-            message: "One or more errors occured.",
+            message: "getAllBooks controller error.",
             error: err
         })
     });
@@ -268,7 +272,7 @@ exports.deleteBook = (req, res) => {
         })
         .catch(err => {
             res.status(422).json({
-                message: "One or more errors occured.",
+                message: "deleteBooks controller error.",
                 error: err
             })
         });
