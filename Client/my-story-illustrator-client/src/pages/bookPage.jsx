@@ -15,7 +15,7 @@ function BookPage(props) {
     const [currentBook, setCurrentBook] = useAtom(currentBookAtom);
     const [userToken] = useAtom(userTokenAtom)
     const params = useParams();
-    const { isLoading, error, sendRequest } = useHttp();
+    const { error, sendRequest } = useHttp();
     let [spreadNum, setSpreadNum] = useState(1);
     const [maxSpreadNum, setMaxSpreadNum] = useState(1);
     
@@ -39,7 +39,7 @@ function BookPage(props) {
         else {
             setCurrentBook(props.books.filter(b => b.id = params.id)[0]);
         }
-    }, [props.books, params.id, setCurrentBook])
+    }, [props.books, params.id, setCurrentBook, error, sendRequest, userToken])
 
     useEffect(() => {
         if (!currentBook) return

@@ -19,8 +19,8 @@ import { BsPlusCircle } from 'react-icons/bs';
 import React, { useRef, useState} from 'react';
 import useHttp from '../../util/use-http';
 import {useAtom} from 'jotai';
-import { userTokenAtom, currentBookAtom } from '../../store/atoms';
-import { Link as ReactRouterLink, useNavigate } from 'react-router-dom';
+import { userTokenAtom } from '../../store/atoms';
+import { useNavigate } from 'react-router-dom';
 
 import StyleChoices from "../read_book/styleChoices";
 

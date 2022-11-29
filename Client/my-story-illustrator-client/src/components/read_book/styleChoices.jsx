@@ -1,4 +1,4 @@
-import { useRadioGroup, Stack, Text, HStack, Flex, Wrap } from '@chakra-ui/react';
+import { useRadioGroup, Wrap } from '@chakra-ui/react';
 
 import StyleChoiceInput from './styleChoiceInput';
 
