@@ -43,11 +43,7 @@ function StyleChoices() {
     },
     {
       name: "pencil sketch", image: "http://weylin.ddns.net/kparksrsp/e1947d80645b11ed830cfd2024f9ff11.png",
-    },
-    {
-      name: "charcoal", image: "",
-      //Untested
-    },
+    }
 
   ]
 

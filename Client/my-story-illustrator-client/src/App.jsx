@@ -1,6 +1,6 @@
 import { ChakraProvider } from '@chakra-ui/react'
 import Login from './pages/login';
-import { userTokenAtom, userIdAtom } from './store/atoms';
+import { userTokenAtom } from './store/atoms';
 import { useAtom } from "jotai";
 import { useEffect, useState } from 'react';
 import {
@@ -25,6 +25,7 @@ function App() {
                 method: 'GET',
                 headers: {
                     "Content-Type": "application/json",
+                    "Authorization": userToken
                 }
             }, response => {
                 if (!error) {
@@ -33,7 +34,9 @@ function App() {
             })
         }
 
-    },[userToken, sendRequest, error]);
+
+    }, [userToken, sendRequest, error]);
+    
 
     return (
         <ChakraProvider>
