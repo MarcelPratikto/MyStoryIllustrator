@@ -44,8 +44,7 @@ function NewStoryButton() {
           author: authorInputRef.current.value,
           style: styleValue
         }
-        //TODO figgure out how to get something out of StyleChoices
-        //TODO should StyleChoices be StyleCHoiceInput?
+
         console.log(request) 
         sendRequest({
           url: 'http://localhost:8080/saveBook',
@@ -56,10 +55,12 @@ function NewStoryButton() {
             "Authorization": userToken
           }
         }, response => {
-            console.log(response)
+            console.log(response.message)
           if (!error) {
             navigate(`/read_book/${response.id}`);
+            console.log("navigate should have happened")
           } else {
+            console.log("error:")
             console.error(error)
           }
         })
