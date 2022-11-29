@@ -3,7 +3,7 @@ import { BsPlusCircle } from 'react-icons/bs';
 //import BookSetupModal from './bookSetupModal';
 
 function NewStoryButton() {
-
+    //TODO this is deprecated, switch to the bookSetupModal
     return (
         <>
             <VStack border="none" background="none" onClick={BookSetupModal.onOpen}>
