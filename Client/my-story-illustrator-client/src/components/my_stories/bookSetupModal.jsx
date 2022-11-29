@@ -16,7 +16,7 @@ import {
 import { Heading, VStack, Center, Icon } from '@chakra-ui/react';
 import { BsPlusCircle } from 'react-icons/bs';
 
-import React, { useRef} from 'react';
+import React, { useRef, useState} from 'react';
 import useHttp from '../../util/use-http';
 import {useAtom} from 'jotai';
 import { userTokenAtom, currentBookAtom } from '../../store/atoms';
@@ -31,7 +31,7 @@ function NewStoryButton() {
     const {error, sendRequest } = useHttp();
     const titleInputRef = useRef();
     const authorInputRef = useRef();
-    const styleInputRef = useRef();
+    const [styleValue, styleSetValue] = useState()
     //TODO use ref or use the atom?
 
     //any time you set the book atom, it overwrites the whole thing
@@ -42,9 +42,10 @@ function NewStoryButton() {
         const request = {
           title: titleInputRef.current.value,
           author: authorInputRef.current.value,
-          style: styleInputRef.current.value
+          style: styleValue
         }
         //TODO figgure out how to get something out of StyleChoices
+        //TODO should StyleChoices be StyleCHoiceInput?
         console.log(request) 
         sendRequest({
           url: 'http://localhost:8080/saveBook',
@@ -90,7 +91,7 @@ function NewStoryButton() {
                         </FormControl>
                         <FormControl>
                             <FormLabel>Art Style</FormLabel>
-                            <StyleChoices ref={styleInputRef}/>
+                            <StyleChoices handleChange={styleSetValue}/>
                             
                         </FormControl>
                     </ModalBody>

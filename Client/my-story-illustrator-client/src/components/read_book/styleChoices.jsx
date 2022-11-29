@@ -1,7 +1,10 @@
 import { useRadioGroup, Stack, Text, HStack, Flex, Wrap } from '@chakra-ui/react';
+
 import StyleChoiceInput from './styleChoiceInput';
 
-function StyleChoices() {
+function StyleChoices({handleChange}) {
+  
+
   const images = [
     {
       name: "Dr Suess", image: 'https://uw.org/wp-content/uploads/2018/05/dr-seuss.jpg',
@@ -51,8 +54,9 @@ function StyleChoices() {
 
   ]
 
-  const { value, getRadioProps, getRootProps } = useRadioGroup({
-    defaultValue: 'Dr Suess'
+  const { getRadioProps, getRootProps } = useRadioGroup({
+    defaultValue: "Doctor Seuss",
+    onChange: handleChange,
   })
 
   return (
