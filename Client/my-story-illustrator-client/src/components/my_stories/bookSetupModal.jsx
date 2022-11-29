@@ -38,14 +38,12 @@ function NewStoryButton() {
     //onChangeHandler to update each proprty
 
     const saveBook = () => {
-        console.log('saving book...')
         const request = {
           title: titleInputRef.current.value,
           author: authorInputRef.current.value,
           style: styleValue
         }
 
-        console.log(request) 
         sendRequest({
           url: 'http://localhost:8080/saveBook',
           method: 'POST',
@@ -55,12 +53,9 @@ function NewStoryButton() {
             "Authorization": userToken
           }
         }, response => {
-            console.log(response.message)
           if (!error) {
-            navigate(`/read_book/${response.id}`);
-            console.log("navigate should have happened")
+            navigate(`/book/${response.id}`);
           } else {
-            console.log("error:")
             console.error(error)
           }
         })
