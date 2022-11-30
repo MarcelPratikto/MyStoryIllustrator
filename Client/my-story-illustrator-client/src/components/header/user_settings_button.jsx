@@ -1,6 +1,6 @@
 import { IconButton } from "@chakra-ui/react";
 import { BsGearFill } from "react-icons/bs";
-import React from "react";
+import React, { useRef, useState} from "react";
 import {
     Button,
     Modal,
@@ -17,36 +17,84 @@ import {
 } from "@chakra-ui/react";
 import { useEffect } from "react";
 import StyleChoices from "../read_book/styleChoices"
-import { useParams } from "react-router-dom"
-import { currentBookAtom } from "../../store/atoms";
 import { useAtom } from "jotai"
+import useHttp from '../../util/use-http';
+import { userTokenAtom, currentBookAtom } from '../../store/atoms';
+import { Link as ReactRouterLink, useNavigate } from 'react-router-dom';
 
 function UserSettingsButton(props) {
     const { isOpen, onOpen, onClose } = useDisclosure()
-    useEffect(() => {
-        onOpen()
-
-    });
-
     const [currentBook, setCurrentBook] = useAtom(currentBookAtom);
+    const [userToken] = useAtom(userTokenAtom);
+    const navigate = useNavigate();
+    const {error, sendRequest } = useHttp();
+    const titleInputRef = useRef();
+    const authorInputRef = useRef();
+    const [styleValue, styleSetValue] = useState()
 
-    function HandleTitleChange(title) {
-        setCurrentBook({
-            ...currentBook, title: title
+    const saveBook = () => {
+        const request = {
+          title: titleInputRef.current.value,
+          author: authorInputRef.current.value,
+          style: styleValue
+        }
+
+        sendRequest({
+          url: 'http://localhost:8080/saveBook',
+          method: 'POST',
+          body: request,
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": userToken
+          }
+        }, response => {
+          if (!error) {
+            navigate(`/book/${response.id}`);
+          } else {
+            console.error(error)
+          }
         })
     }
 
-    function HandleAuthorChange(author) {
-        setCurrentBook({
-            ...currentBook, author: author
+    const deleteBook = () => {
+            const request = {
+                bookId: currentBook.id
+            }
+
+        sendRequest({
+          url: 'http://localhost:8080/deleteBook',
+          method: 'POST',
+          body: request,
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": userToken
+          }
+        }, response => {
+          if (!error) {
+            navigate(`/book/${response.id}`);
+          } else {
+            console.error(error)
+          }
+        })
+    }
+    
+    function HandleTitleChange(event) {
+         setCurrentBook({
+             ...currentBook, title: event.target.value
         })
     }
 
-    function HandleStyleChange(name) {
-        console.log(name)
+    function HandleAuthorChange(event) {
+        console.log(event)
+        setCurrentBook({
+            ...currentBook, author: event.target.value
+        })
     }
 
-   // const {getinfo, updateInfo} = 
+    //function HandleDeleteButtonPress() {
+       // deleteBook;
+        //() => navigate(-1);
+    //}
 
     return (
         <>
@@ -60,31 +108,31 @@ function UserSettingsButton(props) {
                     <ModalBody>
                         <FormControl>
                             <FormLabel> Title </FormLabel>
-                            <Input type='text' placeholder="New Title Here" value={currentBook.title} onChange={HandleTitleChange}/>
+                            <Input type='text' ref={titleInputRef} placeholder="New Title Here" value={currentBook.title} onChange={HandleTitleChange}/>
                         </FormControl>
                         <FormControl>
                             <FormLabel>Author</FormLabel>
-                            <Input type='text' placeholder="New Author Here" value={currentBook.author} onChange={HandleAuthorChange}/>
+                            <Input type='text' ref={authorInputRef} placeholder="New Author Here" value={currentBook.author} onChange={HandleAuthorChange}/>
                         </FormControl>
                         <FormControl>
                             <FormLabel>Change Art Style</FormLabel>
-                            <StyleChoices onChange={HandleStyleChange}/>
+                            <StyleChoices value={currentBook.style} handleChange={styleSetValue}/>
                         </FormControl>
                     </ModalBody>
                     <ModalFooter>
                         <Button
-                            isLoading
+                            
                             loadingText='Deleting'
                             colorScheme='red'
                             mr={3} 
-                            onClick={onClose}
+                            onClick={deleteBook}
                             variant='outline'
                             spinnerPlacement='start'
                         >
                             Delete Book
                         </Button>
-                        <Button colorScheme='blue' mr={3} onClick={onClose}>
-                             Update
+                        <Button colorScheme='blue' mr={3} onClick={saveBook}>
+                            Update Book
                         </Button>
                         <Button colorScheme='blue' mr={3} onClick={onClose}>
                              Close
