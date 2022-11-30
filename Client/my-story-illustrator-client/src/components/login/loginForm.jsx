@@ -12,12 +12,11 @@ import React, { useRef, useEffect } from 'react';
 import useHttp from '../../util/use-http';
 import PasswordInput from './passwordInput';
 import {useAtom} from 'jotai';
-import { userTokenAtom, userIdAtom } from '../../store/atoms';
+import { userTokenAtom } from '../../store/atoms';
 import { Link as ReactRouterLink, useNavigate } from 'react-router-dom';
 
 function LoginForm() {
   const [userToken, setUserToken] = useAtom(userTokenAtom);
-  const [userId, setUserId] = useAtom(userIdAtom)
   const navigate = useNavigate();
   const { isLoading, error, sendRequest } = useHttp();
   const usernameInputRef = useRef();
@@ -38,7 +37,6 @@ function LoginForm() {
     }, response => {
       if (!error) {
         setUserToken(response.token);
-        setUserId(response.userId);
         navigate("/");
       } else {
         console.error(error)
@@ -51,7 +49,7 @@ function LoginForm() {
       navigate('/')
     }
 
-  }, []);
+  }, [navigate, userToken]);
 
   return (
     <Box >

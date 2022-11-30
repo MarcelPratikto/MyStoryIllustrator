@@ -1,6 +1,5 @@
 import { WrapItem, Center} from '@chakra-ui/react';
 
-
 function StoryButtonWrapper(props){
 
     return(

@@ -5,46 +5,36 @@ import RightPage from "../components/read_book/rightPage"
 import PageFooter from "../components/read_book/footer"
 import Header from "../components/header/header"
 import { useParams } from "react-router-dom"
-import { currentBookAtom } from "../store/atoms";
+import { currentBookAtom, userTokenAtom } from "../store/atoms";
 import { useAtom } from "jotai"
+import useHttp from '../util/use-http';
 
 //the main page showing an open book
 //this component needs to keep track of pages for each page and the footer component
 function BookPage(props) {
     const [currentBook, setCurrentBook] = useAtom(currentBookAtom);
+    const [userToken] = useAtom(userTokenAtom)
     const params = useParams();
+    const { isLoading, error, sendRequest } = useHttp();
     let [spreadNum, setSpreadNum] = useState(1);
     const [maxSpreadNum, setMaxSpreadNum] = useState(1);
+    
     //this useEffect is to set the book we are reading, or get it from db if it wasn't passed in.
     useEffect(() => {
         if (!props.books) {
             //TODO: get book from db if it wasn't passed in
-
-            //temporary dummy data:
-            setCurrentBook({
-                "id": 1,
-                "title": "A book by Cierra",
-                "author": "me",
-                "userId": 1,
-                "spreads": [
-                    {
-                        "spreadNumber": 1,
-                        "imageUrl": "https://static01.nyt.com/images/2021/02/17/dining/17tootired-grilled-cheese/17tootired-grilled-cheese-articleLarge.jpg?quality=75&auto=webp&disable=upscale",
-                        "text": "this is about github logo and a small house on a green hill",
-                        "caption": "a small house on a green hill",
-                        "bookId": 1
-                    },
-                    {
-                        "spreadNumber": 2,
-                        "imageUrl": "https://www.realsimple.com/thmb/w5geXAkGNIPl694NoAIifjRDQLQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/healthiest-food-for-every-day-2000-e807f4237f3345769c78114cca8c5f4a.jpg",
-                        "text": "This is the story of my whole life",
-                        "caption": "a picture of fried rice with spam",
-                        "bookId": 1,
-                        "updatedAt": "2022-11-18T00:03:03.081Z",
-                        "createdAt": "2022-11-18T00:03:03.081Z"
-                    }
-                ]
-            });
+            sendRequest({
+                url: `http://localhost:8080/getBook/${params.id}`,
+                method: 'GET',
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": userToken
+                }
+            }, response => {
+                if (!error) {
+                    setCurrentBook(() => response.book)
+                }
+            })
         }
         else {
             setCurrentBook(props.books.filter(b => b.id = params.id)[0]);
@@ -58,8 +48,6 @@ function BookPage(props) {
 
 
     const incrementSpreadNum = () => {
-        console.log('spreadNum:', spreadNum)
-        console.log('maxSpreadNum:', maxSpreadNum)
         //  Check if > than max spread num, if so add new page?
         if (spreadNum > maxSpreadNum) {
             console.log('making a new spread')
@@ -96,7 +84,7 @@ function BookPage(props) {
 
     const updateImage = (imageUrl) => {
         let newSpreads = currentBook.spreads
-        newSpreads[spreadNum].imageUrl = imageUrl
+        newSpreads[spreadNum - 1].imageUrl = imageUrl
 
         setCurrentBook({
             ...currentBook,
@@ -106,7 +94,7 @@ function BookPage(props) {
 
     const updateCaption = (caption) => {
         let newSpreads = currentBook.spreads
-        newSpreads[spreadNum].caption = caption
+        newSpreads[spreadNum - 1].caption = caption
         setCurrentBook({
             ...currentBook,
             spreads: newSpreads
