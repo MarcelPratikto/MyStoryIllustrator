@@ -53,6 +53,7 @@ function StyleChoices({handleChange}) {
           <StyleChoiceInput
             key={image.name}
             image={image.image}
+            alt={image.name}
             {...getRadioProps({ value: image.name })}
           />
         )

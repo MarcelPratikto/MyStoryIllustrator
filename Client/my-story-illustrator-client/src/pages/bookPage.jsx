@@ -31,6 +31,7 @@ function BookPage() {
                 }
             }, response => {
                 if (!error) {
+                    response.book.spreads.sort((a, b) => a.spreadNumber - b.spreadNumber)
                     setCurrentBook(() => response.book)
                 }
             })
