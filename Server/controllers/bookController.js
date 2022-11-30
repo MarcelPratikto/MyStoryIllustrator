@@ -11,6 +11,7 @@ exports.postSaveBook = (req, res, next) => {
     const userId = req.body.userId;
     const title = req.body.title;
     const author = req.body.author;
+    const style = req.body.style;
 
     let spreads
     if (req.body.spreads) {
@@ -19,7 +20,7 @@ exports.postSaveBook = (req, res, next) => {
                 SpreadNumber: spread.spread,
                 ImageUrl: spread.imageUrl,
                 Text: spread.text,
-                Caption: spread.caption
+                Caption: spread.caption,
             }
         })
 
@@ -37,6 +38,7 @@ exports.postSaveBook = (req, res, next) => {
     Book.create({
         Title: title,
         Author: author,
+        Style: style,
         UserId: userId,
         Spreads: spreads || []
     }, {
@@ -68,6 +70,7 @@ exports.putUpdateBook = (req, res) => {
     const bookId = req.body.id;
     const title = req.body.title;
     const author = req.body.author;
+    const style = req.body.style;
     const spreads = req.body.spreads.map(spread => {
         return {
             SpreadNumber: spread.spreadNumber || null,
@@ -89,6 +92,7 @@ exports.putUpdateBook = (req, res) => {
 
         oldBook.Title = title;
         oldBook.Author = author;
+        oldBook.Style = style;
         oldBook.save()
             .then(book => {
                 //save spreads
@@ -150,6 +154,7 @@ exports.putUpdateBook = (req, res) => {
                                 id: bookId,
                                 title: book.Title,
                                 author: book.Author,
+                                style: book.Style,
                                 userId: book.UserId,
                                 spreads: newSpreads
                             }
@@ -187,19 +192,39 @@ exports.getBook = (req, res) => {
             {model: Spread}
         ]
     }).then(book => {
+        let spreads = [];
+        if (book.Spreads) {
+            spreads = book.Spreads.map((spread) => {
+                return {
+                    spreadId: spread.SpreadId,
+                    spreadNumber: spread.SpreadNumber,
+                    bookId: spread.BookId,
+                    imageUrl: spread.ImageURL,
+                    text: spread.Text,
+                    caption: spread.Caption
 
+                }
+            })
+        }
         res.status(200).json({
-            book: book
+            book: {
+                id: book.Id,
+                title: book.Title,
+                author: book.Author,
+                style: book.Style,
+                userId: book.UserId,
+                spreads: spreads
+            }
         })
 
 
     })
-    //     .catch(err => {
-    //     res.status(422).json({
-    //         message: "getBooks controller error.",
-    //         error: err
-    //     })
-    // });
+        .catch(err => {
+        res.status(422).json({
+            message: "getBooks controller error.",
+            error: err
+        })
+    });
 
 
 }
@@ -220,6 +245,7 @@ exports.getAllBooks = (req, res) => {
                     id: book.Id,
                     title: book.Title,
                     author: book.Author,
+                    style: book.Style,
                     userId: book.UserId,
                     createdAt: book.createdAt,
                     updatedAt: book.updatedAt,

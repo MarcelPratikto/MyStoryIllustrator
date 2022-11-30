@@ -15,7 +15,7 @@ import { useAtom } from 'jotai';
 const useHttp = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [userToken, setUserToken] = useAtom(userTokenAtom);
+  const [, setUserToken] = useAtom(userTokenAtom);
 
 
   const sendRequest = useCallback(async (requestConfig, applyData) => {
@@ -45,7 +45,7 @@ const useHttp = () => {
       console.log(err)
     }
     setIsLoading(false);
-  }, []);
+  }, [setUserToken]);
   return {
     isLoading: isLoading,
     error: error,

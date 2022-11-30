@@ -14,7 +14,7 @@ import HomePage from './pages/homepage';
 import BookPage from './pages/bookPage';
 
 function App() {
-    const [userToken, setUserToken] = useAtom(userTokenAtom);
+    const [userToken] = useAtom(userTokenAtom);
     const { isLoading, error, sendRequest } = useHttp();
     const [books, setBooks] = useState([]);
     

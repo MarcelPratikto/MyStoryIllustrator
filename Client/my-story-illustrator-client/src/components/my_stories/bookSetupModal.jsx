@@ -19,8 +19,8 @@ import { BsPlusCircle } from 'react-icons/bs';
 import React, { useRef, useState} from 'react';
 import useHttp from '../../util/use-http';
 import {useAtom} from 'jotai';
-import { userTokenAtom, currentBookAtom } from '../../store/atoms';
-import { Link as ReactRouterLink, useNavigate } from 'react-router-dom';
+import { userTokenAtom } from '../../store/atoms';
+import { useNavigate } from 'react-router-dom';
 
 import StyleChoices from "../read_book/styleChoices";
 
@@ -39,9 +39,9 @@ function NewStoryButton() {
 
     const saveBook = () => {
         const request = {
-          title: titleInputRef.current.value,
-          author: authorInputRef.current.value,
-          style: styleValue
+          title: titleInputRef.current.value || 'untitled',
+          author: authorInputRef.current.value || '',
+          style: styleValue || ''
         }
 
         sendRequest({
@@ -53,7 +53,8 @@ function NewStoryButton() {
             "Authorization": userToken
           }
         }, response => {
-          if (!error) {
+            if (!error) {
+              console.log(response)
             navigate(`/book/${response.id}`);
           } else {
             console.error(error)
