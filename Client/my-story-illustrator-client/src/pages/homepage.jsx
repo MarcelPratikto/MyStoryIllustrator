@@ -1,6 +1,7 @@
 import MyStories from '../components/my_stories/my_stories';
 import Header from '../components/header/header';
 import {Flex} from '@chakra-ui/react'
+import UserSettingsButton from "../components/header/user_settings_button"
 
 function HomePage(props) {
     return (
