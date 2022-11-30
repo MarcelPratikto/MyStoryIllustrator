@@ -10,7 +10,7 @@ import useHttp from '../../util/use-http';
 function Header(props) {
     const navigate = useNavigate();
     let [userToken, setUserToken] = useAtom(userTokenAtom);
-    let [currentBook] = useAtom(currentBookAtom);
+    let [currentBook, setCurrentBook] = useAtom(currentBookAtom);
     let showSettings = props.showSettings === undefined ? true : props.showSettings;
     let showBackArrow = props.showBackArrow === undefined ? true : props.showBackArrow;
     let showSaveIcon = props.showSaveIcon === undefined ? true : props.showBackArrow;
@@ -41,9 +41,22 @@ function Header(props) {
         })
     }
 
+    const goBackHandler = () => {
+        //when someone hits the back arrow, let's save their story, clear the current book, and then navigate.
+        saveStory();
+        setCurrentBook({
+            title: '',
+            imageUrl: '',
+            author: '',
+            style: '',
+            spreads: []
+        });
+        navigate('/');
+    }
+
     return (
         <Flex minWidth='max-content' alignItems='center' justify='space-between' background="darkblue" py={2} px={3}>
-            {showBackArrow && <GoBackButton />}
+            {showBackArrow && <GoBackButton goBackHandler={goBackHandler}/>}
             <Spacer />
             <Center>
                 <Heading color="white" >{props.heading}</Heading>

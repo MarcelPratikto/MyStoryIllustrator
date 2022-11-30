@@ -1,7 +1,7 @@
 import GenerateImage from "./generateImage"
 import GenericPage from "./genericPage"
 
-function RightPage({ caption, image, updateCaption, updateImage }) {
+function RightPage({ caption, image, updateCaption, updateImage, style, username }) {
 
     return (
         <GenericPage>
@@ -10,6 +10,8 @@ function RightPage({ caption, image, updateCaption, updateImage }) {
                 image={image}
                 updateCaption={updateCaption}
                 updateImage={updateImage}
+                style={style}
+                username={username}
             />
         </GenericPage>
     )

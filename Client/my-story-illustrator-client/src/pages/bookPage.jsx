@@ -11,17 +11,16 @@ import useHttp from '../util/use-http';
 
 //the main page showing an open book
 //this component needs to keep track of pages for each page and the footer component
-function BookPage(props) {
+function BookPage() {
     const [currentBook, setCurrentBook] = useAtom(currentBookAtom);
     const [userToken] = useAtom(userTokenAtom)
     const params = useParams();
-    const { isLoading, error, sendRequest } = useHttp();
+    const { error, sendRequest } = useHttp();
     let [spreadNum, setSpreadNum] = useState(1);
     const [maxSpreadNum, setMaxSpreadNum] = useState(1);
-    
+
     //this useEffect is to set the book we are reading, or get it from db if it wasn't passed in.
     useEffect(() => {
-        if (!props.books) {
             //TODO: get book from db if it wasn't passed in
             sendRequest({
                 url: `http://localhost:8080/getBook/${params.id}`,
@@ -35,19 +34,21 @@ function BookPage(props) {
                     setCurrentBook(() => response.book)
                 }
             })
-        }
-        else {
-            setCurrentBook(props.books.filter(b => b.id = params.id)[0]);
-        }
-    }, [props.books, params.id, setCurrentBook])
+
+    }, [params.id, setCurrentBook, error, sendRequest, userToken])
 
     useEffect(() => {
-        if (!currentBook) return
+        if (!currentBook) {
+            return;
+        }
+        if (currentBook.spreads.length < 1) {
+            incrementSpreadNum(false);
+        }
         setMaxSpreadNum(currentBook.spreads.length - 1)
     }, [currentBook]);
 
 
-    const incrementSpreadNum = () => {
+    const incrementSpreadNum = (updatePage = true) => {
         //  Check if > than max spread num, if so add new page?
         if (spreadNum > maxSpreadNum) {
             console.log('making a new spread')
@@ -57,13 +58,15 @@ function BookPage(props) {
                 imageUrl: '',
                 caption: '',
                 text: '',
-                spreadNumber: spreadNum + 1 
+                spreadNumber: spreadNum + 1
             })
             setCurrentBook({
                 ...currentBook
             })
         }
-        setSpreadNum(spreadNum + 1)
+        if (updatePage) {
+            setSpreadNum(spreadNum + 1)
+        }
 
         console.log('currentBook:', currentBook)
     }
@@ -113,6 +116,8 @@ function BookPage(props) {
                     caption={currentBook?.spreads[spreadNum - 1]?.caption}
                     updateImage={updateImage}
                     updateCaption={updateCaption}
+                    style={currentBook?.style}
+                    username={currentBook?.author}
                 />
             </Flex>
             <PageFooter spreadNum={spreadNum} incrementSpreadNum={incrementSpreadNum} decrementSpreadNum={decrementSpreadNum} />
