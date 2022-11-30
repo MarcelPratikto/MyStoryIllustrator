@@ -42,6 +42,10 @@ function UserSettingsButton(props) {
         })
     }
 
+    function HandleStyleChange(name) {
+        console.log(name)
+    }
+
    // const {getinfo, updateInfo} = 
 
     return (
@@ -64,7 +68,7 @@ function UserSettingsButton(props) {
                         </FormControl>
                         <FormControl>
                             <FormLabel>Change Art Style</FormLabel>
-                            <StyleChoices/>
+                            <StyleChoices onChange={HandleStyleChange}/>
                         </FormControl>
                     </ModalBody>
                     <ModalFooter>
