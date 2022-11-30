@@ -39,9 +39,9 @@ function NewStoryButton() {
 
     const saveBook = () => {
         const request = {
-          title: titleInputRef.current.value,
-          author: authorInputRef.current.value,
-          style: styleValue
+          title: titleInputRef.current.value || 'untitled',
+          author: authorInputRef.current.value || '',
+          style: styleValue || ''
         }
 
         sendRequest({
@@ -53,7 +53,8 @@ function NewStoryButton() {
             "Authorization": userToken
           }
         }, response => {
-          if (!error) {
+            if (!error) {
+              console.log(response)
             navigate(`/book/${response.id}`);
           } else {
             console.error(error)

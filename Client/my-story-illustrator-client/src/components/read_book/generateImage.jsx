@@ -4,7 +4,7 @@ import useHttp from '../../util/use-http';
 import { userTokenAtom } from '../../store/atoms';
 import { useAtom } from 'jotai';
 
-function GenerateImage({caption, image, updateCaption, updateImage}) {
+function GenerateImage({caption, image, updateCaption, updateImage, style, username}) {
     const [prompt] = useState('');
     const { isLoading, error, sendRequest } = useHttp();
     const [userToken] = useAtom(userTokenAtom);
@@ -17,7 +17,7 @@ function GenerateImage({caption, image, updateCaption, updateImage}) {
         const request = {
             prompt: captionInputRef.current.value,
             username: 'testUser', //change this later to use real username
-            style: "Vincent Van Gogh"
+            style: style
         } 
         sendRequest({
           url: 'http://localhost:8080/generateImage',
