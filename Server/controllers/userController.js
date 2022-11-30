@@ -54,8 +54,8 @@ exports.postLogin = (req, res, next) => {
     const username = req.body.username;
     const password = req.body.password
 
-    //allow user to stay logged in for one week (168 hours)
-    const tokenExpiryTime = 168 * 60 * 60;
+    //allow user to stay logged in for one day
+    const tokenExpiryTime = 86400000;
     let loadedUser;
     User.findOne({
         where: {
@@ -88,7 +88,7 @@ exports.postLogin = (req, res, next) => {
             { expiresIn: `${tokenExpiryTime}` }
         );
         res.status(200).json({
-            message: `Login successful. Token valid for the next ${tokenExpiryTime} hours.`,
+            message: `Login successful. Token valid for the next 24 hours.`,
             token: token,
             userId: loadedUser.Id
         })

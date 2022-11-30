@@ -58,7 +58,7 @@ function BookPage() {
                 imageUrl: '',
                 caption: '',
                 text: '',
-                spreadNumber: spreadNum + 1
+                spreadNumber: updatePage ? spreadNum + 1 : spreadNum
             })
             setCurrentBook({
                 ...currentBook
@@ -67,8 +67,6 @@ function BookPage() {
         if (updatePage) {
             setSpreadNum(spreadNum + 1)
         }
-
-        console.log('currentBook:', currentBook)
     }
 
     const decrementSpreadNum = () => {
