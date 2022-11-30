@@ -32,15 +32,17 @@ function UserSettingsButton(props) {
     const authorInputRef = useRef();
     const [styleValue, styleSetValue] = useState()
 
-    const saveBook = () => {
+    const updateBook = () => {
         const request = {
+          bookId: currentBook.id,
           title: titleInputRef.current.value,
           author: authorInputRef.current.value,
-          style: styleValue
+          style: styleValue,
+          spreads: currentBook.spreads
         }
 
         sendRequest({
-          url: 'http://localhost:8080/saveBook',
+          url: 'http://localhost:8080/updateBook',
           method: 'POST',
           body: request,
           headers: {
@@ -63,7 +65,7 @@ function UserSettingsButton(props) {
 
         sendRequest({
           url: 'http://localhost:8080/deleteBook',
-          method: 'POST',
+          method: 'DELETE',
           body: request,
           headers: {
             "Content-Type": "application/json",
@@ -71,7 +73,7 @@ function UserSettingsButton(props) {
           }
         }, response => {
           if (!error) {
-            navigate(`/book/${response.id}`);
+            navigate(`/`);
           } else {
             console.error(error)
           }
@@ -131,7 +133,7 @@ function UserSettingsButton(props) {
                         >
                             Delete Book
                         </Button>
-                        <Button colorScheme='blue' mr={3} onClick={saveBook}>
+                        <Button colorScheme='blue' mr={3} onClick={updateBook}>
                             Update Book
                         </Button>
                         <Button colorScheme='blue' mr={3} onClick={onClose}>
