@@ -38,6 +38,7 @@ function GenerateImage({caption, image, updateCaption, updateImage, style, usern
         <Flex flexDirection="column" height="100%">
             <Flex flexGrow={1} border={image === "" && "2px"} borderColor="lightGrey" justify="center">
                 <Image
+                    fit={'scale-down'}
                     src={image}
                     alt={prompt}
                     fallbackSrc='https://lightwidget.com/wp-content/uploads/local-file-not-found.png'
