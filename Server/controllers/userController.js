@@ -12,37 +12,49 @@ exports.postSignup = (req, res, next) => {
     const password = req.body.password;
     const errors = validationResult(req);
 
-    //TODO: check if user already exists
-
     if (!errors.isEmpty()) {
-        const error = new Error("Validation failed.");
-        error.data = errors.array();
-        return res.status(422).json({
-            message: "Could not sign up.",
-            error: errors.errors
-        });
+        if (errors.errors[0]["param"] === "password") {
+            return res.status(422).json({
+                message: "Password must have: 6 characters",
+                error: "Password error"
+            });
+        }
+        else {
+            const error = new Error("Validation failed.");
+            error.data = errors.array();
+            return res.status(422).json({
+                message: "Could not sign up.",
+                error: errors.errors
+            });
+        }
     }
 
-        bcrypt.hash(password, 7)
-            .then(pw => {
-                let user = User.build({
-                    Username: username,
-                    HashedPassword: pw
-                });
-                userObj = user
-                return user.save();
-            }).then(result => {
-                res.status(201).json({
-                    message: `User created.`,
-                    id: result.Id
+    bcrypt.hash(password, 7)
+        .then(pw => {
+            let user = User.build({
+                Username: username,
+                HashedPassword: pw
+            });
+            userObj = user
+            return user.save();
+        }).then(result => {
+            res.status(201).json({
+                message: `User created.`,
+                id: result.Id
+            })
+        }).catch(err => { // makes sure that username must be unique when registering
+            if (err["name"] === "SequelizeUniqueConstraintError"){
+                return res.status(422).json({
+                    message: err["errors"][0]["message"],
+                    error: err["name"]
                 })
-            }).catch(err => {
-                res.status(422).json({
+            } else {
+                return res.status(422).json({
                     message: "One or more erros occured.",
                     error: err
                 })
-            })
-    
+            }
+        })
 }
 
 
