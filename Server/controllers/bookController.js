@@ -137,12 +137,12 @@ exports.putUpdateBook = (req, res) => {
                             updates.push(update)
                         }
                     })
-                        // .catch(err => {
-                        //     res.status(422).json({
-                        //         message: "One or more errors occured.",
-                        //         error: err
-                        //     })
-                        // });
+                    // .catch(err => {
+                    //     res.status(422).json({
+                    //         message: "One or more errors occured.",
+                    //         error: err
+                    //     })
+                    // });
                     queries.push(query)
                 })
                 //run this code after all updates have been made
@@ -164,20 +164,20 @@ exports.putUpdateBook = (req, res) => {
                 })
 
             })
-            // .catch(err => {
-            //     console.log(err)
-            //     res.status(422).json({
-            //         message: "One or more errors occured.",
-            //         error: err
-            //     })
-            // });
-    })
         // .catch(err => {
+        //     console.log(err)
         //     res.status(422).json({
         //         message: "One or more errors occured.",
         //         error: err
         //     })
         // });
+    })
+    // .catch(err => {
+    //     res.status(422).json({
+    //         message: "One or more errors occured.",
+    //         error: err
+    //     })
+    // });
 
 }
 
@@ -189,7 +189,7 @@ exports.getBook = (req, res) => {
             Id: bookId
         },
         include: [
-            {model: Spread}
+            { model: Spread }
         ]
     }).then(book => {
         let spreads = [];
@@ -220,11 +220,11 @@ exports.getBook = (req, res) => {
 
     })
         .catch(err => {
-        res.status(422).json({
-            message: "getBooks controller error.",
-            error: err
-        })
-    });
+            res.status(422).json({
+                message: "getBooks controller error.",
+                error: err
+            })
+        });
 
 
 }
@@ -236,7 +236,7 @@ exports.getAllBooks = (req, res) => {
             UserId: userId
         },
         include: [
-            {model: Spread }  
+            { model: Spread }
         ]
     }).then(books => {
         res.status(200).json({
@@ -267,11 +267,11 @@ exports.getAllBooks = (req, res) => {
 
     })
         .catch(err => {
-        res.status(422).json({
-            message: "getAllBooks controller error.",
-            error: err
-        })
-    });
+            res.status(422).json({
+                message: "getAllBooks controller error.",
+                error: err
+            })
+        });
 
 
 }
@@ -316,7 +316,7 @@ exports.generateImage = (req, res, next) => {
     const style = req.body.style;
 
     const filename = uuid.v1();
-    const text = `${prompt} in the style of ${style}`;
+    const text = `[[${prompt}]] in the style of ${style}`;
 
     axios.get(`${BASEURL}/generate-image/?text=${text}&quality=${QUALITY}&directory=${folder}&filename=${filename}`, {
         headers: {

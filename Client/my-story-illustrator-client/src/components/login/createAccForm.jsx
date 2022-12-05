@@ -10,12 +10,14 @@ import React, { useRef } from 'react';
 import PasswordInput from './passwordInput';
 import useHttp from '../../util/use-http';
 import { Link as ReactRouterLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function CreateAccForm() {
   const { isLoading, error, sendRequest } = useHttp();
   const usernameInputRef = useRef();
   const passwordInputRef = useRef();
   const confirmPasswordInputRef = useRef();
+  const navigate = useNavigate();
 
   const trySignup = () => {
 
@@ -35,8 +37,10 @@ function CreateAccForm() {
       console.log(response)
       if (!error) {
         //handle success
+        navigate(`/login`)
+        // redirect to login page
       }
-      // TODO: redirect to login page
+      
     })
   }
 
