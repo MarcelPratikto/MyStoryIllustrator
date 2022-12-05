@@ -1,6 +1,6 @@
 import { Heading, Flex, Spacer, Center, IconButton, Spinner } from "@chakra-ui/react";
-import GoBackButton from "./go_back_button";
-import UserSettingsButton from "./user_settings_button";
+import GoBackButton from "./goBackButton";
+import UserSettingsButton from "./userSettingsButton";
 import { userTokenAtom, currentBookAtom } from "../../store/atoms";
 import { useAtom } from "jotai";
 import { RiLogoutBoxLine, RiSave3Fill } from "react-icons/ri";

@@ -1,4 +1,4 @@
-import MyStories from '../components/my_stories/my_stories';
+import MyStories from '../components/my_stories/myStories';
 import Header from '../components/header/header';
 import { Flex } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';

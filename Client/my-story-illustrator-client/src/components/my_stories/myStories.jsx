@@ -1,6 +1,6 @@
-import StoryCoverButton from "./story_cover_button";
+import StoryCoverButton from "./storyCoverButton";
 import NewStoryButton from "./bookSetupModal";
-import StoryButtonWrapper from "./story_button_wrapper";
+import StoryButtonWrapper from "./storyButtonWrapper";
 import { Link, Spinner } from '@chakra-ui/react'
 import { Link as ReactRouterLink } from 'react-router-dom';
 
