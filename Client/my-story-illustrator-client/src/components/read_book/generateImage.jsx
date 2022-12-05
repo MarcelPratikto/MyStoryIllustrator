@@ -33,14 +33,7 @@ function GenerateImage({caption, image, updateCaption, updateImage, style, usern
         })
  
     }
-    useEffect(() => {
-        if (error) {
-            //image generation server is down. Use dummy image instead
-            updateImage(`https://lightwidget.com/wp-content/uploads/local-file-not-found.png`)
-            console.log('there was an error getting the image')
-        }
 
-    }, [error, updateImage]);
     return(
         <Flex flexDirection="column" height="100%">
             <Flex flexGrow={1} border={image === "" && "2px"} borderColor="lightGrey" justify="center">
@@ -48,6 +41,7 @@ function GenerateImage({caption, image, updateCaption, updateImage, style, usern
                     fit={'scale-down'}
                     src={image}
                     alt={prompt}
+                    fallbackSrc='https://lightwidget.com/wp-content/uploads/local-file-not-found.png'
                 />
             </Flex>
             <Box>
