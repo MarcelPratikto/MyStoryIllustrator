@@ -20,7 +20,7 @@ function StyleChoiceInput(props) {
                 w={150}
                 p={1}
             >
-                <Image src={image} boxSize="150" objectFit="cover" {...getLabelProps()} />
+                <Image src={image} boxSize="150" objectFit="cover" alt={props.alt} {...getLabelProps()} />
             </Box>
         </chakra.label>
     )

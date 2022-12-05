@@ -12,6 +12,7 @@ function LeftPage({text, updateText}) {
                 variant="unstyled"
                 cursor="text"
                 maxH="100%"
+                height="100%"
                 placeholder="Once upon a time..."
                 focusBorderColor="lightGrey"
                 fontSize="2xl"

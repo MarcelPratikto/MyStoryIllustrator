@@ -60,8 +60,6 @@ function LoginForm() {
         mt={20}
         boxSize="sm"
         h="lg"
-        border='2px'
-        borderColor='gray.200'
         boxShadow='dark-lg'
         p='3'
         rounded='md'
@@ -90,7 +88,7 @@ function LoginForm() {
             ?
             <Spinner />
             :
-            <Button borderRadius="10" onClick={tryLogin}>Login</Button>
+            <Button type="submit" onSubmit={tryLogin} borderRadius="10" onClick={tryLogin}>Login</Button>
           }
           
         </Box>

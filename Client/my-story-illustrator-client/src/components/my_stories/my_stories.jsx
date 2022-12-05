@@ -16,8 +16,8 @@ function MyStories(props) {
     // TODO: add subtle hover effect on the books
 
     return (
-        <Wrap padding="20px" bg="white" flexGrow="1">
-            <StoryButtonWrapper bg="#C4CFD4" >
+        <Wrap padding="20px" bg="#c6caef" flexGrow="1" overflowY="auto">
+            <StoryButtonWrapper bg="#e1e1ea" >
                 <NewStoryButton/>
             </StoryButtonWrapper>
             { stories && stories.map((story) => {

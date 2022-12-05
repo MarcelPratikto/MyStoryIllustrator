@@ -13,7 +13,7 @@ function Header(props) {
     let [currentBook, setCurrentBook] = useAtom(currentBookAtom);
     let showSettings = props.showSettings === undefined ? true : props.showSettings;
     let showBackArrow = props.showBackArrow === undefined ? true : props.showBackArrow;
-    let showSaveIcon = props.showSaveIcon === undefined ? true : props.showBackArrow;
+    let showSaveIcon = props.showSaveIcon === undefined ? true : props.showSaveIcon;
     const { isLoading, error, sendRequest } = useHttp();
 
     const logout = () => {
@@ -62,7 +62,7 @@ function Header(props) {
                 <Heading color="white" >{props.heading}</Heading>
             </Center>
             <Spacer />
-            {showSaveIcon && isLoading ? <Spinner color="white" variant="link" /> : <IconButton icon={<RiSave3Fill />} color="white" size="lg" variant="link" onClick={saveStory} />}
+            {showSaveIcon && <IconButton icon={<RiSave3Fill />} color="white" size="lg" variant="link" onClick={saveStory} disabled={isLoading} />}
             {showSettings && <UserSettingsButton />}
             {userToken &&
                 <IconButton

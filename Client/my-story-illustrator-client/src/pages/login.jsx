@@ -6,7 +6,7 @@ import CreateAccForm from "../components/login/createAccForm"
 export default function Login({ isSignUp }) {
     return (
         <>
-            <Header heading={"My Story Illustrator"} showSettings={false} showBackArrow={false} />
+            <Header heading={"My Story Illustrator"} showSettings={false} showBackArrow={false} showSaveIcon={false} />
             {   isSignUp ?
                 <CreateAccForm />
                 :
