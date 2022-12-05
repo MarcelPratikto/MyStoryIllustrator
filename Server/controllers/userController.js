@@ -50,7 +50,7 @@ exports.postSignup = (req, res, next) => {
                 })
             } else {
                 return res.status(422).json({
-                    message: "One or more erros occured.",
+                    message: "One or more errors occured.",
                     error: err
                 })
             }
