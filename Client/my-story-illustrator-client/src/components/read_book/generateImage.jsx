@@ -57,7 +57,7 @@ function GenerateImage({caption, image, updateCaption, updateImage, style, usern
                     onChange={captionChangeHandler}
                 ></Textarea>
                 <Flex alignItems="center">
-                    <Button my={3} onClick={generateImage} disabled={isLoading}>Generate Image</Button>
+                    <Button my={3} onClick={generateImage} disabled={isLoading} bg="#049bc5" color="white">Generate Image</Button>
                     {isLoading && <Spinner ml={2} />}
                     {error && <Text color="red" ml={2}>An error occurred. Please try again later.</Text>}
                 </Flex>
