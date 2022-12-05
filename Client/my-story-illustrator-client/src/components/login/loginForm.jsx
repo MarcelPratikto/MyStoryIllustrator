@@ -84,7 +84,7 @@ function LoginForm() {
             ?
             <Spinner />
             :
-            <Button borderRadius="10" onClick={tryLogin}>Login</Button>
+            <Button type="submit" onSubmit={tryLogin} borderRadius="10" onClick={tryLogin}>Login</Button>
           }
           
         </Box>

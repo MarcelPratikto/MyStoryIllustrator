@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import { userTokenAtom } from '../store/atoms';
 import { useAtom } from 'jotai';
 import useHttp from '../util/use-http';
-import UserSettingsButton from "../components/header/user_settings_button"
 
 function HomePage() {
     const [userToken] = useAtom(userTokenAtom);
