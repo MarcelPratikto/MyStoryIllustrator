@@ -9,7 +9,10 @@ import { Wrap } from '@chakra-ui/react';
 function MyStories(props) {
 
     const stories = props.stories
-    // TODO: make books a different colors
+    
+    const colors = ["#049BC5", "#EE4425", "#F9C524", "#F37D22", "#53498d", "#049BC5", "#EE4425", "#F9C524", "#F37D22", "#53498d"];
+    const iterator = colors.values();
+
     // TODO: add subtle hover effect on the books
 
     return (
@@ -19,7 +22,7 @@ function MyStories(props) {
             </StoryButtonWrapper>
             { stories && stories.map((story) => {
                 return (
-                    <StoryButtonWrapper key={story.id}>
+                    <StoryButtonWrapper key={story.id} bg={iterator.next().value}>
                         <Link as={ReactRouterLink} to={'/book/' + story.id}  display="block" h="100%" _hover={{textDecoration: "none"}} >
                             <StoryCoverButton Title={story.title} CoverImageUri={story.coverUrl} />
                         </Link>

@@ -7,6 +7,7 @@ import {
   Link,
   Spinner,
   Text,
+  Image
 } from '@chakra-ui/react'
 import React, { useRef, useEffect } from 'react';
 import useHttp from '../../util/use-http';
@@ -14,6 +15,7 @@ import PasswordInput from './passwordInput';
 import {useAtom} from 'jotai';
 import { userTokenAtom } from '../../store/atoms';
 import { Link as ReactRouterLink, useNavigate } from 'react-router-dom';
+import logo from '../../assets/logo-png.png';
 
 function LoginForm() {
   const [userToken, setUserToken] = useAtom(userTokenAtom);
@@ -57,13 +59,15 @@ function LoginForm() {
         m="auto"
         mt={20}
         boxSize="sm"
+        h="lg"
         boxShadow='dark-lg'
-        p='6'
+        p='3'
         rounded='md'
         bg='white'
         alignItems='center'
         justifyContent='center'
         textAlign='center'>
+        <Image src={logo} boxSize='175px' justifyContent='center' m='auto'/>
         <Box m={5}>
           <FormControl isRequired>
             <FormLabel> Username </FormLabel>

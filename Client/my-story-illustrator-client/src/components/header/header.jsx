@@ -55,7 +55,7 @@ function Header(props) {
     }
 
     return (
-        <Flex minWidth='max-content' alignItems='center' justify='space-between' background="darkblue" py={2} px={3}>
+        <Flex minWidth='max-content' alignItems='center' justify='space-between' background="#f37d22" py={2} px={3}>
             {showBackArrow && <GoBackButton goBackHandler={goBackHandler}/>}
             <Spacer />
             <Center>
