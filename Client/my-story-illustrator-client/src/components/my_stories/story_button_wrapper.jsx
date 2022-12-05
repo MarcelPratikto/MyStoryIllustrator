@@ -14,6 +14,7 @@ function StoryButtonWrapper(props){
             paddingLeft={0}
             padding={2}
             display="block"
+            {...props}
         >
             <Center h="100%">
                 {props.children}

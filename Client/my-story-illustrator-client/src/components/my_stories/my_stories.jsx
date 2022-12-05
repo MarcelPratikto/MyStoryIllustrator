@@ -16,13 +16,13 @@ function MyStories(props) {
     // TODO: add subtle hover effect on the books
 
     return (
-        <Wrap padding="20px" bg="#c6caef" flexGrow="1" overflowY="auto">
-            <StoryButtonWrapper bg="#e1e1ea" >
+        <Wrap padding="20px" bg="white" flexGrow="1" overflowY="auto">
+            <StoryButtonWrapper bg="#e1e1ea" color="black">
                 <NewStoryButton/>
             </StoryButtonWrapper>
             { stories && stories.map((story) => {
                 return (
-                    <StoryButtonWrapper key={story.id} bg={iterator.next().value}>
+                    <StoryButtonWrapper key={story.id} bg={iterator.next().value} color="white">
                         <Link as={ReactRouterLink} to={'/book/' + story.id}  display="block" h="100%" _hover={{textDecoration: "none"}} >
                             <StoryCoverButton Title={story.title} CoverImageUri={story.coverUrl} />
                         </Link>
