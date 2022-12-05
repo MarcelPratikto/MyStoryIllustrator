@@ -34,7 +34,7 @@ function HomePage() {
 
     return (
         <Flex h="100%" flexDir="column">
-            <Header heading="My Stories" showSettings={false} showBackArrow={false} />
+            <Header heading="My Stories" showSettings={false} showBackArrow={false} showSaveIcon={false} />
             <MyStories stories={books} flexGrow="1" loading={isLoading} />
         </Flex>
     )
