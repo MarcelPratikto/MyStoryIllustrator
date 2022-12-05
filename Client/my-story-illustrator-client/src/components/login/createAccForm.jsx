@@ -50,8 +50,6 @@ function CreateAccForm() {
       <Box m={"auto"}
         mt={20}
         boxSize="md"
-        border='2px'
-        borderColor='gray.200'
         boxShadow='dark-lg'
         p='6'
         rounded='md'
