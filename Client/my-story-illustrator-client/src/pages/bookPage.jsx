@@ -106,7 +106,7 @@ function BookPage() {
     return (
         <Flex h="100%" flexDir="column">
             <Header heading={currentBook?.title} />
-            <Flex justify="space-between" h="100%">
+            <Flex justify="space-between" h="100%" bg="#c2dee8">
                 <LeftPage
                     text={currentBook?.spreads[spreadNum - 1]?.text}
                     updateText={updateText} />

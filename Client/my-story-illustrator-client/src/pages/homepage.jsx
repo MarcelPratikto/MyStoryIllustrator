@@ -1,11 +1,10 @@
-import MyStories from '../components/my_stories/my_stories';
+import MyStories from '../components/my_stories/myStories';
 import Header from '../components/header/header';
 import { Flex } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { userTokenAtom } from '../store/atoms';
 import { useAtom } from 'jotai';
 import useHttp from '../util/use-http';
-import UserSettingsButton from "../components/header/user_settings_button"
 
 function HomePage() {
     const [userToken] = useAtom(userTokenAtom);
@@ -34,7 +33,7 @@ function HomePage() {
 
     return (
         <Flex h="100%" flexDir="column">
-            <Header heading="My Stories" showSettings={false} showBackArrow={false} />
+            <Header heading="My Stories" showSettings={false} showBackArrow={false} showSaveIcon={false} />
             <MyStories stories={books} flexGrow="1" loading={isLoading} />
         </Flex>
     )

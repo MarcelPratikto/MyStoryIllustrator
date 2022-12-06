@@ -1,6 +1,6 @@
 import { Heading, Flex, Spacer, Center, IconButton, Spinner } from "@chakra-ui/react";
-import GoBackButton from "./go_back_button";
-import UserSettingsButton from "./user_settings_button";
+import GoBackButton from "./goBackButton";
+import UserSettingsButton from "./userSettingsButton";
 import { userTokenAtom, currentBookAtom } from "../../store/atoms";
 import { useAtom } from "jotai";
 import { RiLogoutBoxLine, RiSave3Fill } from "react-icons/ri";
@@ -13,7 +13,7 @@ function Header(props) {
     let [currentBook, setCurrentBook] = useAtom(currentBookAtom);
     let showSettings = props.showSettings === undefined ? true : props.showSettings;
     let showBackArrow = props.showBackArrow === undefined ? true : props.showBackArrow;
-    let showSaveIcon = props.showSaveIcon === undefined ? true : props.showBackArrow;
+    let showSaveIcon = props.showSaveIcon === undefined ? true : props.showSaveIcon;
     const { isLoading, error, sendRequest } = useHttp();
 
     const logout = () => {
@@ -55,14 +55,14 @@ function Header(props) {
     }
 
     return (
-        <Flex minWidth='max-content' alignItems='center' justify='space-between' background="darkblue" py={2} px={3}>
+        <Flex minWidth='max-content' alignItems='center' justify='space-between' background="#f37d22" py={2} px={3}>
             {showBackArrow && <GoBackButton goBackHandler={goBackHandler}/>}
             <Spacer />
             <Center>
                 <Heading color="white" >{props.heading}</Heading>
             </Center>
             <Spacer />
-            {showSaveIcon && isLoading ? <Spinner color="white" variant="link" /> : <IconButton icon={<RiSave3Fill />} color="white" size="lg" variant="link" onClick={saveStory} />}
+            {showSaveIcon && <IconButton icon={<RiSave3Fill />} color="white" size="lg" variant="link" onClick={saveStory} disabled={isLoading} />}
             {showSettings && <UserSettingsButton />}
             {userToken &&
                 <IconButton

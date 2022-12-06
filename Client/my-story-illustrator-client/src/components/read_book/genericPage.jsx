@@ -10,6 +10,7 @@ function GenericPage(props) {
             p={3}
             borderRadius="md"
             shadow="base"
+            bg="white"
         >
             {props.children}
         </Box>

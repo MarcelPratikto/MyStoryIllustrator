@@ -50,8 +50,6 @@ function CreateAccForm() {
       <Box m={"auto"}
         mt={20}
         boxSize="md"
-        border='2px'
-        borderColor='gray.200'
         boxShadow='dark-lg'
         p='6'
         rounded='md'
@@ -78,7 +76,7 @@ function CreateAccForm() {
           </FormControl>
         </Box>
         <Box>
-          <Button borderRadius="10" onClick={trySignup}>Create Account</Button>
+          <Button type="submit" onSubmit={trySignup}  borderRadius="10" onClick={trySignup}>Create Account</Button>
         </Box>
         <Box m={7}>
           <Link as={ReactRouterLink} to={'/login'}>Already have an account? Click Here.</Link>
